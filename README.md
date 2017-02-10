@@ -1,9 +1,8 @@
 # Asphalt
-===========
+
 IOT project
 
 ## Features
-===========
  * kotlin
  * anko
  * mosby
