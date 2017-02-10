@@ -1,4 +1,4 @@
-package zinnur.ru.rockylabs.kotlintest;
+package zinnur.iot.rockylabs.asphalt;
 
 import org.junit.Test;
 

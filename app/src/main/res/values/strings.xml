@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Conductor kotlin</string>
+    <string name="app_name">Asphalt</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

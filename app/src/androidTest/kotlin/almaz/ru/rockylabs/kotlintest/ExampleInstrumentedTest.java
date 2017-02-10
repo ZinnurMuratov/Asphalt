@@ -1,4 +1,4 @@
-package zinnur.ru.rockylabs.kotlintest;
+package zinnur.iot.rockylabs.asphalt;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

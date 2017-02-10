@@ -6,13 +6,13 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name="zinnur.iot.rockylabs.asphalt.AsphaltApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name="zinnur.ru.rockylabs.kotlintest.App"
         android:theme="@style/AppTheme">
-        <activity android:name="zinnur.ru.rockylabs.kotlintest.MainActivity">
+        <activity android:name="zinnur.iot.rockylabs.asphalt.UI.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
