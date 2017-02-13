@@ -3,6 +3,7 @@ package zinnur.iot.rockylabs.asphalt.di.components
 import dagger.Component
 import zinnur.iot.rockylabs.asphalt.di.modules.ControllerModule
 import zinnur.iot.rockylabs.asphalt.di.scopes.ControllerScope
+import zinnur.iot.rockylabs.asphalt.mvp.presenters.SignInPresenter
 import zinnur.iot.rockylabs.asphalt.mvp.presenters.WelcomePresenter
 import zinnur.iot.rockylabs.asphalt.navigation.Navigator
 
@@ -17,4 +18,7 @@ interface ControllerComponent {
     fun navigator(): Navigator
 
     fun welcomePresenter(): WelcomePresenter
+
+    fun signInPresenter(): SignInPresenter
+
 }

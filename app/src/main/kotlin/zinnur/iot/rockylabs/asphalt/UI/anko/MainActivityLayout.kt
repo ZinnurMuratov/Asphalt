@@ -14,18 +14,18 @@ import org.jetbrains.anko.*
  */
 
 class MainActivityLayout : ViewBinder<MainActivity> {
-    override fun bind(t: MainActivity): View  = t.UI {
+    override fun bind(ui: MainActivity): View  = ui.UI {
         coordinatorLayout {
             fitsSystemWindows = true
 
             appBarLayout {
-                t.toolbar = toolbar(R.style.AppTheme_PopupOverlay) {
-                    t.setSupportActionBar(this)
-                    t.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+                ui.toolbar = toolbar(R.style.AppTheme_PopupOverlay) {
+                    ui.setSupportActionBar(this)
+                    ui.supportActionBar?.setDisplayHomeAsUpEnabled(false)
                 }.lparams(width = matchParent, height = actionBarSize())
             }.lparams(width = matchParent)
 
-            t.container = frameLayout {
+            ui.container = frameLayout {
             }.lparams(width = matchParent, height = matchParent) {
                 behavior = AppBarLayout.ScrollingViewBehavior()
             }

@@ -1,6 +1,7 @@
-package zinnur.iot.rockylabs.asphalt.mvp.views
+package zinnur.iot.rockylabs.asphalt.mvp.views.viewStates
 
 import com.hannesdorfmann.mosby3.mvp.viewstate.ViewState
+import zinnur.iot.rockylabs.asphalt.mvp.views.WelcomeView
 
 /**
  * Created by Zinnur on 10.02.17.

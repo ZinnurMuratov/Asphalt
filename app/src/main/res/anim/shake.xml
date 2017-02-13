@@ -1,0 +1,5 @@
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromXDelta="0%"
+    android:toXDelta="2%"
+    android:duration="400"
+    android:interpolator="@anim/shake_interpolator" />
