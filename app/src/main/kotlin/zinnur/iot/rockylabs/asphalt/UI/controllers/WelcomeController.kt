@@ -1,22 +1,17 @@
 package zinnur.iot.rockylabs.asphalt.UI.controllers
 
+import android.app.Activity
 import zinnur.iot.rockylabs.asphalt.UI.anko.WelcomeControllerLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bluelinelabs.conductor.Controller
-import kotlin.ru.rockylabs.kotlintest.R
 import com.hannesdorfmann.mosby3.conductor.viewstate.MvpViewStateController
-import com.hannesdorfmann.mosby3.mvp.viewstate.ViewState
-import com.hannesdorfmann.mosby3.mvp.viewstate.lce.data.RetainingLceViewState
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 import zinnur.iot.rockylabs.asphalt.daggerComponent
 import zinnur.iot.rockylabs.asphalt.mvp.presenters.WelcomePresenter
 import zinnur.iot.rockylabs.asphalt.mvp.views.WelcomeView
 import zinnur.iot.rockylabs.asphalt.mvp.views.viewStates.WelcomeViewState
-import android.support.v7.app.AppCompatActivity
 import android.widget.*
+import zinnur.iot.rockylabs.asphalt.mvp.views.viewStates.MainView
 
 
 /**
@@ -31,16 +26,26 @@ class WelcomeController : WelcomeView, MvpViewStateController<WelcomeView, Welco
     var signIn:     Button? = null
     var signUp:     Button? = null
     var container:  LinearLayout? = null
-    private val viewBinder = WelcomeControllerLayout()
+    var activityCallback: MainView? = null
 
+    private val viewBinder = WelcomeControllerLayout()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup): View {
-        (activity as AppCompatActivity).supportActionBar!!.hide()
+        (activity as MainView).showToolbar(false)
         return viewBinder.bind(this)
     }
+
+    override fun onActivityStarted(activity: Activity) {
+        super.onActivityStarted(activity)
+        activityCallback =  activity as MainView
+        activityCallback!!.lockDrawer(true)
+    }
+
+
 
     override fun onDestroyView(view: View) {
         super.onDestroyView(view)
         viewBinder.unbind(this)
+        activityCallback = null
     }
 
     override fun onViewStateInstanceRestored(instanceStateRetained: Boolean) {}
@@ -50,10 +55,4 @@ class WelcomeController : WelcomeView, MvpViewStateController<WelcomeView, Welco
     override fun onNewViewStateInstance() {}
 
     override fun createViewState() = WelcomeViewState()
-
-
-
-
-
-
 }

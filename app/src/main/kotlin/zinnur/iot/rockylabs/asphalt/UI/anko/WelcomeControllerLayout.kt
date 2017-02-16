@@ -9,6 +9,7 @@ import android.support.design.R.id.center_horizontal
 import zinnur.iot.rockylabs.asphalt.UI.controllers.WelcomeController
 import android.view.Gravity
 import android.view.View
+import android.view.WindowManager
 import android.widget.TextView
 import org.jetbrains.anko.*
 import zinnur.iot.rockylabs.asphalt.navigator
@@ -20,6 +21,7 @@ class WelcomeControllerLayout : ViewBinder<WelcomeController> {
         return ui.activity!!.UI {
             ui.activity!!.window.setBackgroundDrawableResource(R.drawable.wellcome_bg)
             ui.background = frameLayout {
+                fitsSystemWindows = false
                 lparams(width = matchParent, height = matchParent) {
                     padding = dimen(R.dimen.activity_horizontal_margin)
                 }
@@ -41,8 +43,9 @@ class WelcomeControllerLayout : ViewBinder<WelcomeController> {
                         }
                         text = "Make asphalt great again"
                         textColorResource = R.color.grey
+                        setFont("fonts/fMedium.ttf")
                         textAlignment = center
-                        textSize = sp(6).toFloat()
+                        textSize = sp(8).toFloat()
                     }
                 }.lparams(width = matchParent, height = wrapContent) {
                     gravity = Gravity.CENTER
@@ -57,11 +60,13 @@ class WelcomeControllerLayout : ViewBinder<WelcomeController> {
                         lparams (width = matchParent, height = heightProcent(10) ){
                             gravity = Gravity.CENTER_HORIZONTAL
                             bottomMargin = heightProcent(1)
+
                         }
                         text = "Sign In"
+                        setFont("fonts/fMedium.ttf")
                         textSize = sp(6).toFloat()
                         backgroundResource = R.drawable.welcome_btn
-                        onClick { ui.navigator.showSignIn() }
+                        onClick { ui.navigator.showSignIn()}
 
                     }
 
@@ -71,9 +76,10 @@ class WelcomeControllerLayout : ViewBinder<WelcomeController> {
                             bottomMargin = heightProcent(1)
                         }
                         text = "Sign Up"
+                        setFont("fonts/fMedium.ttf")
                         textSize = sp(6).toFloat()
                         backgroundResource = R.drawable.welcome_btn
-                        onClick { ui.navigator.showSignUp() }
+                        onClick { ui.navigator.showSignUp()}
 
                     }
 

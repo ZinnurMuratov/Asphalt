@@ -7,17 +7,16 @@ import android.text.method.PasswordTransformationMethod
 import android.view.Gravity
 import android.view.View
 import org.jetbrains.anko.*
-import zinnur.iot.rockylabs.asphalt.UI.controllers.SignInController
+import zinnur.iot.rockylabs.asphalt.UI.controllers.SignUpController
 import kotlin.ru.rockylabs.kotlintest.R
 
 /**
- * Created by Zinnur on 13.02.17.
+ * Created by Zinnur on 14.02.17.
  */
 
-class SignInControllerLayout : ViewBinder<SignInController> {
 
-
-    override fun bind(ui: SignInController): View {
+class SignUpControllerLayout : ViewBinder<SignUpController>{
+    override fun bind(ui: SignUpController): View {
         return ui.activity!!.UI {
             ui.activity!!.window.setBackgroundDrawableResource(R.drawable.wellcome_bg)
             ui.background = frameLayout {
@@ -31,10 +30,10 @@ class SignInControllerLayout : ViewBinder<SignInController> {
                             gravity = Gravity.CENTER
                             bottomMargin = dip(10)
                         }
-                        text = "Sign In"
-                        setFont("fonts/fMedium.ttf")
+                        text = "Sign Up"
                         textColorResource = R.color.white
                         textSize = sp(12).toFloat()
+                        setFont("fonts/fMedium.ttf")
                     }
 
                     ui.email = editText {
@@ -47,18 +46,39 @@ class SignInControllerLayout : ViewBinder<SignInController> {
                         textSize = sp(8).toFloat()
                     }
 
+                    ui.name = editText {
+                        lparams(width = matchParent, height = wrapContent){
+                            bottomMargin = dip(2)
+                        }
+                        hint = "name"
+                        setFont("fonts/fMedium.ttf")
+                        inputType =  InputType.TYPE_CLASS_TEXT
+                        textSize = sp(8).toFloat()
+                    }
+
                     ui.password = editText {
                         lparams(width = matchParent, height = wrapContent){
                             bottomMargin = dip(6)
-                            setFont("fonts/fMedium.ttf")
                         }
                         hint = "password"
+                        setFont("fonts/fMedium.ttf")
                         inputType =  InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD
                         transformationMethod = PasswordTransformationMethod()
                         textSize = sp(8).toFloat()
                     }
 
-                    ui.signIn = button {
+                    ui.repeatPass = editText {
+                        lparams(width = matchParent, height = wrapContent){
+                            bottomMargin = dip(6)
+                        }
+                        hint = "confirm password"
+                        setFont("fonts/fMedium.ttf")
+                        inputType =  InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD
+                        transformationMethod = PasswordTransformationMethod()
+                        textSize = sp(8).toFloat()
+                    }
+
+                    ui.signUp = button {
                         lparams (width = matchParent, height = heightProcent(10) ){
                             gravity = Gravity.CENTER_HORIZONTAL
                             bottomMargin = heightProcent(1)
@@ -67,7 +87,7 @@ class SignInControllerLayout : ViewBinder<SignInController> {
                         setFont("fonts/fMedium.ttf")
                         textSize = sp(6).toFloat()
                         backgroundResource = R.drawable.regular_btn
-                        onClick { ui.onLoginClicked()}
+                        onClick { ui.onSignUpClicked()}
 
                     }
 
@@ -101,15 +121,15 @@ class SignInControllerLayout : ViewBinder<SignInController> {
         }.view
     }
 
-    override fun unbind(t: SignInController) {
+    override fun unbind(t: SignUpController) {
         t.background = null
         t.container = null
         t.email = null
+        t.name = null
         t.password = null
-        t.signIn = null
+        t.repeatPass = null
+        t.signUp = null
         t.headText = null
-        t.transition = null
-    }
-
+        t.transition = null    }
 
 }

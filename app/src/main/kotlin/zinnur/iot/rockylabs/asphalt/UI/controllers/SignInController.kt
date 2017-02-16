@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.*
-import com.bluelinelabs.conductor.Controller
 import com.hannesdorfmann.mosby3.conductor.viewstate.MvpViewStateController
 import zinnur.iot.rockylabs.asphalt.UI.anko.SignInControllerLayout
 import zinnur.iot.rockylabs.asphalt.daggerComponent
@@ -17,6 +16,7 @@ import zinnur.iot.rockylabs.asphalt.mvp.views.SignInView
 import zinnur.iot.rockylabs.asphalt.mvp.views.viewStates.SignInViewState
 import kotlin.ru.rockylabs.kotlintest.R
 import android.text.TextUtils
+import zinnur.iot.rockylabs.asphalt.utils.isEmailValid
 
 /**
  * Created by Zinnur on 13.02.17.
@@ -92,7 +92,7 @@ class SignInController : MvpViewStateController<SignInView, SignInPresenter, Sig
         val pass = password!!.text.toString()
 
         container!!.clearAnimation()
-        if (TextUtils.isEmpty(mail)) {
+        if (!isEmailValid(mail)) {
             email!!.clearAnimation()
             val shake = AnimationUtils.loadAnimation(activity, R.anim.shake)
             email!!.startAnimation(shake)
