@@ -9,4 +9,5 @@ import javax.inject.Inject
  */
 class WelcomePresenter @Inject constructor() : MvpBasePresenter<WelcomeView>() {
 
+
 }

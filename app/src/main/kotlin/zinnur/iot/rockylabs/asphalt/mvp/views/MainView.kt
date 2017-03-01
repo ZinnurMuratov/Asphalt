@@ -1,4 +1,4 @@
-package zinnur.iot.rockylabs.asphalt.mvp.views.viewStates
+package zinnur.iot.rockylabs.asphalt.mvp.views
 
 /**
  * Created by Zinnur on 15.02.17.
