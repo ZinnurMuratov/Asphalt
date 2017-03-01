@@ -11,7 +11,7 @@ import zinnur.iot.rockylabs.asphalt.mvp.presenters.WelcomePresenter
 import zinnur.iot.rockylabs.asphalt.mvp.views.WelcomeView
 import zinnur.iot.rockylabs.asphalt.mvp.views.viewStates.WelcomeViewState
 import android.widget.*
-import zinnur.iot.rockylabs.asphalt.mvp.views.viewStates.MainView
+import zinnur.iot.rockylabs.asphalt.mvp.views.MainView
 
 
 /**

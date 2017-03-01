@@ -1,14 +1,9 @@
 package zinnur.iot.rockylabs.asphalt.navigation
 
-import android.view.View
-import com.bluelinelabs.conductor.ControllerChangeHandler
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
 import com.bluelinelabs.conductor.changehandler.*
-import zinnur.iot.rockylabs.asphalt.UI.controllers.SignInController
-import zinnur.iot.rockylabs.asphalt.UI.controllers.SignUpController
-import zinnur.iot.rockylabs.asphalt.UI.controllers.TrackingController
-import zinnur.iot.rockylabs.asphalt.UI.controllers.WelcomeController
+import zinnur.iot.rockylabs.asphalt.UI.controllers.*
 
 /**
  * Created by Zinnur on 10.02.17.
@@ -61,4 +56,46 @@ interface Navigator {
             )
         }
     }
+
+    fun showFeed(root: Boolean){
+        val handler = AutoTransitionChangeHandler()
+        if (root) {
+            router.setRoot(RouterTransaction.with(FeedController())
+                    .popChangeHandler(handler)
+                    .pushChangeHandler(handler)
+            )
+        } else {
+            router.pushController(RouterTransaction.with(FeedController())
+                    .popChangeHandler(handler)
+                    .pushChangeHandler(handler)
+            )
+        }
+    }
+
+    fun showSettings(root: Boolean){
+        val handler = AutoTransitionChangeHandler()
+        if (root) {
+            router.setRoot(RouterTransaction.with(SettingsController())
+                    .popChangeHandler(handler)
+                    .pushChangeHandler(handler)
+            )
+        } else {
+            router.pushController(RouterTransaction.with(SettingsController())
+                    .popChangeHandler(handler)
+                    .pushChangeHandler(handler)
+            )
+        }
+    }
+
+    fun showCameraPermission(){
+        val handler = AutoTransitionChangeHandler()
+            router.pushController(RouterTransaction.with(NoticePermissonsController())
+                    .popChangeHandler(handler)
+                    .pushChangeHandler(handler)
+            )
+
+    }
+
+
+
 }

@@ -1,10 +1,11 @@
 package zinnur.iot.rockylabs.asphalt
 
+import android.app.Activity
 import com.bluelinelabs.conductor.Controller
 import zinnur.iot.rockylabs.asphalt.di.components.ControllerComponent
 import zinnur.iot.rockylabs.asphalt.di.components.DaggerControllerComponent
 import zinnur.iot.rockylabs.asphalt.di.modules.ControllerModule
-import zinnur.iot.rockylabs.asphalt.mvp.views.viewStates.MainView
+import zinnur.iot.rockylabs.asphalt.mvp.presenters.TrackingPresenter
 import zinnur.iot.rockylabs.asphalt.navigation.Navigator
 import zinnur.iot.rockylabs.asphalt.navigation.PhoneNavigator
 
@@ -22,3 +23,10 @@ val Controller.daggerComponent: ControllerComponent
 
 val Controller.navigator: Navigator
     get() = daggerComponent.navigator()
+
+
+
+
+
+
+

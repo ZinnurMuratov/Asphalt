@@ -33,7 +33,7 @@ class SignUpControllerLayout : ViewBinder<SignUpController>{
                         text = "Sign Up"
                         textColorResource = R.color.white
                         textSize = sp(12).toFloat()
-                        setFont("fonts/fMedium.ttf")
+                        setFont("fonts/RobotoLight.ttf")
                     }
 
                     ui.email = editText {
@@ -41,7 +41,7 @@ class SignUpControllerLayout : ViewBinder<SignUpController>{
                             bottomMargin = dip(2)
                         }
                         hint = "email"
-                        setFont("fonts/fMedium.ttf")
+                        setFont("fonts/RobotoLight.ttf")
                         inputType =  InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
                         textSize = sp(8).toFloat()
                     }
@@ -51,7 +51,7 @@ class SignUpControllerLayout : ViewBinder<SignUpController>{
                             bottomMargin = dip(2)
                         }
                         hint = "name"
-                        setFont("fonts/fMedium.ttf")
+                        setFont("fonts/RobotoLight.ttf")
                         inputType =  InputType.TYPE_CLASS_TEXT
                         textSize = sp(8).toFloat()
                     }
@@ -61,7 +61,7 @@ class SignUpControllerLayout : ViewBinder<SignUpController>{
                             bottomMargin = dip(6)
                         }
                         hint = "password"
-                        setFont("fonts/fMedium.ttf")
+                        setFont("fonts/RobotoLight.ttf")
                         inputType =  InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD
                         transformationMethod = PasswordTransformationMethod()
                         textSize = sp(8).toFloat()
@@ -72,7 +72,7 @@ class SignUpControllerLayout : ViewBinder<SignUpController>{
                             bottomMargin = dip(6)
                         }
                         hint = "confirm password"
-                        setFont("fonts/fMedium.ttf")
+                        setFont("fonts/RobotoLight.ttf")
                         inputType =  InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD
                         transformationMethod = PasswordTransformationMethod()
                         textSize = sp(8).toFloat()
@@ -84,7 +84,7 @@ class SignUpControllerLayout : ViewBinder<SignUpController>{
                             bottomMargin = heightProcent(1)
                         }
                         text = "go"
-                        setFont("fonts/fMedium.ttf")
+                        setFont("fonts/RobotoLight.ttf")
                         textSize = sp(6).toFloat()
                         backgroundResource = R.drawable.regular_btn
                         onClick { ui.onSignUpClicked()}
@@ -98,7 +98,7 @@ class SignUpControllerLayout : ViewBinder<SignUpController>{
                             bottomMargin = dip(6)
                         }
                         text = "bad email or password"
-                        setFont("fonts/fMedium.ttf")
+                        setFont("fonts/RobotoLight.ttf")
                         setTypeface(null, Typeface.BOLD)
                         textColorResource = R.color.redError
                         textSize = sp(8).toFloat()

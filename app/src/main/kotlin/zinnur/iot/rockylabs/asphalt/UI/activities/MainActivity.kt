@@ -8,25 +8,23 @@ import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Router
-import com.bluelinelabs.conductor.RouterTransaction
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.debug
-import zinnur.iot.rockylabs.asphalt.UI.controllers.TrackingController
-import zinnur.iot.rockylabs.asphalt.UI.controllers.WelcomeController
-import zinnur.iot.rockylabs.asphalt.mvp.views.viewStates.MainView
+import zinnur.iot.rockylabs.asphalt.mvp.views.MainView
 import zinnur.iot.rockylabs.asphalt.navigation.Navigator
 import zinnur.iot.rockylabs.asphalt.navigation.PhoneNavigator
 import kotlin.ru.rockylabs.kotlintest.R
+import android.R.id.toggle
+
+
 
 class MainActivity : MainView, AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, AnkoLogger{
-
-
 
     lateinit var toolbar:   Toolbar
     lateinit var container: ViewGroup
@@ -36,19 +34,22 @@ class MainActivity : MainView, AppCompatActivity(), NavigationView.OnNavigationI
 
     private val viewBinder = MainActivityLayout()
     private lateinit var navigator: Navigator
+    private lateinit var toggle: ActionBarDrawerToggle
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(viewBinder.bind(this))
-        val toggle = ActionBarDrawerToggle(
+        toggle = ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer.addDrawerListener(toggle)
         toggle.syncState()
         router = Conductor.attachRouter(this, container, savedInstanceState)
         navigator = PhoneNavigator(router) as Navigator
-        navigator.showWelcome(true)
+        if (!router.hasRootController()){
+            navigator.showWelcome(true)
+        }
 
     }
 
@@ -60,12 +61,9 @@ class MainActivity : MainView, AppCompatActivity(), NavigationView.OnNavigationI
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.nav_camera -> navigator.showTracking(false)
-            R.id.nav_gallery -> navigator.showSignIn()
-            R.id.nav_slideshow -> navigator.showSignUp()
-            R.id.nav_manage -> navigator.showWelcome(false)
-            R.id.nav_share -> debug("-> share")
-            R.id.nav_send -> debug("-> send")
+            R.id.nav_tracking -> navigator.showTracking(true)
+            R.id.nav_feed -> navigator.showFeed(true)
+            R.id.nav_settings -> navigator.showSettings(true)
         }
         drawer.closeDrawer(GravityCompat.START)
         return true
@@ -83,6 +81,36 @@ class MainActivity : MainView, AppCompatActivity(), NavigationView.OnNavigationI
             toolbar.visibility = View.VISIBLE
         else
             toolbar.visibility = View.GONE
+    }
+
+    override fun changeTitle(title: String) {
+        toolbar.title = title
+    }
+
+    override fun setHomeEnabled(enable: Boolean) {
+        supportActionBar!!.setDisplayHomeAsUpEnabled(enable)
+        supportActionBar!!.setDisplayShowHomeEnabled(enable)
+        supportActionBar!!.setHomeButtonEnabled(enable)
+        if (!enable){
+            toggle.isDrawerIndicatorEnabled = !enable
+            syncToggle()
+            toolbar.setNavigationOnClickListener { drawer.openDrawer(GravityCompat.START) }
+        } else {
+            toolbar.setNavigationOnClickListener { onBackPressed() }
+        }
+
+    }
+
+    override fun syncToggle() {
+        toggle.syncState()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            Log.d("sadsa", "sadsd")
+            navigator.showTracking(true)
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }

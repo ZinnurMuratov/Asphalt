@@ -10,7 +10,6 @@ import org.jetbrains.anko.appcompat.v7.toolbar
 import org.jetbrains.anko.design.*
 import org.jetbrains.anko.support.v4.drawerLayout
 import kotlin.ru.rockylabs.kotlintest.R
-import kotlin.ru.rockylabs.kotlintest.R.style.AppTheme
 
 /**
  * Created by Zinnur on 12.01.17.
@@ -39,10 +38,9 @@ class MainActivityLayout : ViewBinder<MainActivity> {
                         lparams(width = wrapContent, height = wrapContent){
                             gravity = Gravity.CENTER
                         }
-                        text = "Tracking"
                         textColorResource = R.color.white
                         textSize = sp(10).toFloat()
-                        setFont("fonts/fThin.ttf")
+                        setFont("fonts/RobotoLight.ttf")
                     }
 
                 }.lparams(width = matchParent, height = actionBarSize())

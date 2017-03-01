@@ -32,7 +32,7 @@ class SignInControllerLayout : ViewBinder<SignInController> {
                             bottomMargin = dip(10)
                         }
                         text = "Sign In"
-                        setFont("fonts/fMedium.ttf")
+                        setFont("fonts/RobotoLight.ttf")
                         textColorResource = R.color.white
                         textSize = sp(12).toFloat()
                     }
@@ -42,7 +42,7 @@ class SignInControllerLayout : ViewBinder<SignInController> {
                             bottomMargin = dip(2)
                         }
                         hint = "email"
-                        setFont("fonts/fMedium.ttf")
+                        setFont("fonts/RobotoLight.ttf")
                         inputType =  InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
                         textSize = sp(8).toFloat()
                     }
@@ -50,7 +50,7 @@ class SignInControllerLayout : ViewBinder<SignInController> {
                     ui.password = editText {
                         lparams(width = matchParent, height = wrapContent){
                             bottomMargin = dip(6)
-                            setFont("fonts/fMedium.ttf")
+                            setFont("fonts/RobotoLight.ttf")
                         }
                         hint = "password"
                         inputType =  InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD
@@ -64,7 +64,7 @@ class SignInControllerLayout : ViewBinder<SignInController> {
                             bottomMargin = heightProcent(1)
                         }
                         text = "go"
-                        setFont("fonts/fMedium.ttf")
+                        setFont("fonts/RobotoLight.ttf")
                         textSize = sp(6).toFloat()
                         backgroundResource = R.drawable.regular_btn
                         onClick { ui.onLoginClicked()}
@@ -78,7 +78,7 @@ class SignInControllerLayout : ViewBinder<SignInController> {
                             bottomMargin = dip(6)
                         }
                         text = "bad email or password"
-                        setFont("fonts/fMedium.ttf")
+                        setFont("fonts/RobotoLight.ttf")
                         setTypeface(null, Typeface.BOLD)
                         textColorResource = R.color.redError
                         textSize = sp(8).toFloat()

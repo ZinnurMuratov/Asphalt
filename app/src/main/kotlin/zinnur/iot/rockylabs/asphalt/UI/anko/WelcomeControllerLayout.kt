@@ -43,7 +43,7 @@ class WelcomeControllerLayout : ViewBinder<WelcomeController> {
                         }
                         text = "Make asphalt great again"
                         textColorResource = R.color.grey
-                        setFont("fonts/fMedium.ttf")
+                        setFont("fonts/RobotoLight.ttf")
                         textAlignment = center
                         textSize = sp(8).toFloat()
                     }
@@ -63,7 +63,7 @@ class WelcomeControllerLayout : ViewBinder<WelcomeController> {
 
                         }
                         text = "Sign In"
-                        setFont("fonts/fMedium.ttf")
+                        setFont("fonts/RobotoLight.ttf")
                         textSize = sp(6).toFloat()
                         backgroundResource = R.drawable.welcome_btn
                         onClick { ui.navigator.showSignIn()}
@@ -76,7 +76,7 @@ class WelcomeControllerLayout : ViewBinder<WelcomeController> {
                             bottomMargin = heightProcent(1)
                         }
                         text = "Sign Up"
-                        setFont("fonts/fMedium.ttf")
+                        setFont("fonts/RobotoLight.ttf")
                         textSize = sp(6).toFloat()
                         backgroundResource = R.drawable.welcome_btn
                         onClick { ui.navigator.showSignUp()}
