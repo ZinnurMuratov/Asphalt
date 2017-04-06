@@ -2,7 +2,7 @@
 
 
 buildscript {
-    ext.kotlin_version = '1.0.6'
+    ext.kotlin_version = '1.1.0'
     repositories {
         jcenter()
         maven {
@@ -10,8 +10,9 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:2.3.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "io.realm:realm-gradle-plugin:3.0.0"
     }
 }
 
@@ -33,7 +34,7 @@ ext {
     mosby = '3.0.0-alpha1'
     anko = '0.9.1'
     supportLib = '25.1.1'
-    retrofit = '2.1.0'
+    retrofit = '2.2.0'
     gson = "2.7"
     okhttp = "3.3.1"
     rxjava = '2.0.4'

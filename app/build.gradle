@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -56,7 +57,7 @@ dependencies {
     provided "javax.annotation:jsr250-api:1.0"
     compile "com.squareup.retrofit2:retrofit:$retrofit"
     compile "com.squareup.retrofit2:converter-gson:$retrofit"
-    compile "com.squareup.retrofit2:adapter-rxjava:$retrofit"
+    compile "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
     compile "com.google.code.gson:gson:$gson"
     compile "com.squareup.okhttp3:logging-interceptor:$okhttp"
     compile "com.android.support:support-v4:$supportLib"
@@ -72,6 +73,11 @@ dependencies {
     compile 'com.jjoe64:graphview:4.2.1'
     compile 'com.patloew.rxlocation:rxlocation:1.0.1'
     compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.2@aar'
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    compile 'com.annimon:stream:1.1.7'
+    compile 'com.f2prateek.rx.preferences2:rx-preferences:2.0.0-RC1'
 
 
 
