@@ -34,7 +34,7 @@ class SignInControllerLayout : ViewBinder<SignInController> {
                         text = "Sign In"
                         setFont("fonts/RobotoLight.ttf")
                         textColorResource = R.color.white
-                        textSize = sp(12).toFloat()
+                        textSizeDimen = R.dimen.font_36sp
                     }
 
                     ui.email = editText {
@@ -44,7 +44,7 @@ class SignInControllerLayout : ViewBinder<SignInController> {
                         hint = "email"
                         setFont("fonts/RobotoLight.ttf")
                         inputType =  InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
-                        textSize = sp(8).toFloat()
+                        textSizeDimen = R.dimen.font_19sp
                     }
 
                     ui.password = editText {
@@ -55,7 +55,7 @@ class SignInControllerLayout : ViewBinder<SignInController> {
                         hint = "password"
                         inputType =  InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD
                         transformationMethod = PasswordTransformationMethod()
-                        textSize = sp(8).toFloat()
+                        textSizeDimen = R.dimen.font_19sp
                     }
 
                     ui.signIn = button {
@@ -65,7 +65,7 @@ class SignInControllerLayout : ViewBinder<SignInController> {
                         }
                         text = "go"
                         setFont("fonts/RobotoLight.ttf")
-                        textSize = sp(6).toFloat()
+                        textSizeDimen = R.dimen.font_16sp
                         backgroundResource = R.drawable.regular_btn
                         onClick { ui.onLoginClicked()}
 

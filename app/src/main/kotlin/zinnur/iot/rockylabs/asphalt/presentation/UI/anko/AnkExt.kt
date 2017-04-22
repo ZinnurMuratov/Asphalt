@@ -8,11 +8,13 @@ import android.support.annotation.ColorRes
 import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.CardView
+import android.support.v7.widget.RecyclerView
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewManager
 import android.view.WindowManager
+import com.google.android.gms.maps.MapView
 import org.jetbrains.anko.custom.ankoView
 import org.jetbrains.anko.wrapContent
 import kotlin.ru.rockylabs.kotlintest.R
@@ -70,3 +72,7 @@ fun <T : android.view.View> T.collapseLayoutParams(
     return this
 }
 
+inline fun ViewManager.mapView(theme: Int = 0, init: MapView.() -> Unit) = ankoView({ MapView(it) }, theme, init)
+
+
+inline fun ViewManager.recycleView(theme: Int = 0, init: RecyclerView.() -> Unit) = ankoView({ RecyclerView(it) }, theme, init)

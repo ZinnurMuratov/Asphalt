@@ -32,7 +32,7 @@ class SignUpControllerLayout : ViewBinder<SignUpController>{
                         }
                         text = "Sign Up"
                         textColorResource = R.color.white
-                        textSize = sp(12).toFloat()
+                        textSizeDimen = R.dimen.font_36sp
                         setFont("fonts/RobotoLight.ttf")
                     }
 
@@ -43,7 +43,7 @@ class SignUpControllerLayout : ViewBinder<SignUpController>{
                         hint = "email"
                         setFont("fonts/RobotoLight.ttf")
                         inputType =  InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
-                        textSize = sp(8).toFloat()
+                        textSizeDimen = R.dimen.font_19sp
                     }
 
                     ui.name = editText {
@@ -53,7 +53,7 @@ class SignUpControllerLayout : ViewBinder<SignUpController>{
                         hint = "name"
                         setFont("fonts/RobotoLight.ttf")
                         inputType =  InputType.TYPE_CLASS_TEXT
-                        textSize = sp(8).toFloat()
+                        textSizeDimen = R.dimen.font_19sp
                     }
 
                     ui.password = editText {
@@ -64,7 +64,7 @@ class SignUpControllerLayout : ViewBinder<SignUpController>{
                         setFont("fonts/RobotoLight.ttf")
                         inputType =  InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD
                         transformationMethod = PasswordTransformationMethod()
-                        textSize = sp(8).toFloat()
+                        textSizeDimen = R.dimen.font_19sp
                     }
 
                     ui.repeatPass = editText {
@@ -75,7 +75,7 @@ class SignUpControllerLayout : ViewBinder<SignUpController>{
                         setFont("fonts/RobotoLight.ttf")
                         inputType =  InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD
                         transformationMethod = PasswordTransformationMethod()
-                        textSize = sp(8).toFloat()
+                        textSizeDimen = R.dimen.font_19sp
                     }
 
                     ui.signUp = button {
@@ -85,7 +85,7 @@ class SignUpControllerLayout : ViewBinder<SignUpController>{
                         }
                         text = "go"
                         setFont("fonts/RobotoLight.ttf")
-                        textSize = sp(6).toFloat()
+                        textSizeDimen = R.dimen.font_16sp
                         backgroundResource = R.drawable.regular_btn
                         onClick { ui.onSignUpClicked()}
 
@@ -101,7 +101,7 @@ class SignUpControllerLayout : ViewBinder<SignUpController>{
                         setFont("fonts/RobotoLight.ttf")
                         setTypeface(null, Typeface.BOLD)
                         textColorResource = R.color.redError
-                        textSize = sp(8).toFloat()
+                        textSizeDimen = R.dimen.font_16sp
                         visibility = View.GONE
                     }
 

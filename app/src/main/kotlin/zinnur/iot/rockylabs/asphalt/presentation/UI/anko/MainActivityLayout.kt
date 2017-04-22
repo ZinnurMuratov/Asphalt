@@ -5,6 +5,7 @@ import android.support.design.widget.AppBarLayout
 import android.support.v4.view.GravityCompat.*
 import android.view.Gravity
 import android.view.View
+import android.widget.TextView
 import org.jetbrains.anko.*
 import org.jetbrains.anko.appcompat.v7.toolbar
 import org.jetbrains.anko.design.*
@@ -54,6 +55,8 @@ class MainActivityLayout : ViewBinder<MainActivity> {
                         .createView(headerContext)
                         .lparams(width = matchParent, height = dimen(R.dimen.nav_header_height))
                 addHeaderView(headerView)
+                ui.userName = headerView.findViewWithTag("username") as TextView
+                ui.email = headerView.findViewWithTag("email") as TextView
                 inflateMenu(R.menu.activity_main_drawer)
                 if(!isInEditMode) {
                     setNavigationItemSelectedListener(ui)

@@ -19,9 +19,6 @@ class UserUseCase @Inject internal constructor(private val authService: AuthServ
                 .user()
     }
 
-    fun test(){
-        Log.d("hee", "hui")
-    }
 
     class Params private constructor(val id: String) {
         companion object {

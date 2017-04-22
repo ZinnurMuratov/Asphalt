@@ -7,28 +7,29 @@ import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter
 import zinnur.iot.rockylabs.asphalt.presentation.mvp.views.TrackingView
 import javax.inject.Inject
 import com.github.pwittchen.reactivesensors.library.ReactiveSensorEvent
+import com.google.android.gms.location.LocationRequest
 import com.patloew.rxlocation.FusedLocation
 import io.reactivex.disposables.Disposables
+import io.reactivex.observers.DisposableObserver
 import org.jetbrains.annotations.Nullable
 import rx.Observable
 import rx.Subscriber
-import rx.Subscription
 import rx.subscriptions.Subscriptions
-
-
-
-
+import zinnur.iot.rockylabs.asphalt.data.entity.AbsResponseEntity
+import zinnur.iot.rockylabs.asphalt.domain.iteractor.CreateHoleUseCase
 
 
 /**
  * Created by Zinnur on 28.02.17.
  */
 class TrackingPresenter @Inject constructor(@Nullable var sensor: Observable<ReactiveSensorEvent>,
-                                            @Nullable var locSensor: FusedLocation) : MvpBasePresenter<TrackingView>(){
+                                            @Nullable var locSensor: FusedLocation,
+                                            var locationRequest: LocationRequest,
+                                            var createHoleUseCase: CreateHoleUseCase) : MvpBasePresenter<TrackingView>(){
 
     private var sensorSubsciption = Subscriptions.empty()
     private var locationSubscription = Disposables.empty()
-    private var lvl: Int = 3
+    private var lvl: Float = 2.0f
     private lateinit var lastLatLng: Location
 
     fun startTraking(){
@@ -52,10 +53,10 @@ class TrackingPresenter @Inject constructor(@Nullable var sensor: Observable<Rea
                 val gForce = Math.sqrt((gX * gX).toDouble() + (gY * gY).toDouble() + (gZ * gZ).toDouble())
                 view?.updateGraph(gForce)
 
-                if (gForce >= lvl && System.currentTimeMillis() - time > 1000) {
-                    time = System.currentTimeMillis()
-                    onHole()
-                }
+                if (gX > lvl  && System.currentTimeMillis() - time > 1000) {  onHole("x", gX.toDouble());  time = System.currentTimeMillis() }
+                if (gY > lvl  && System.currentTimeMillis() - time > 1000) {  onHole("y", gY.toDouble());  time = System.currentTimeMillis() }
+                if (gZ > lvl  && System.currentTimeMillis() - time > 1000) {  onHole("z", gZ.toDouble());  time = System.currentTimeMillis() }
+
 
             }
         })
@@ -63,16 +64,26 @@ class TrackingPresenter @Inject constructor(@Nullable var sensor: Observable<Rea
 
     fun startLocationSensor(){
         locationSubscription = locSensor
-                .lastLocation()
+                .updates(locationRequest)
                 .subscribe{
                     lastLatLng = it
                 }
     }
 
 
-    fun onHole(){
+    fun onHole(axis: String, lvl: Double){
+
+        if (lastLatLng.hasSpeed()){
+            Log.d("speed", " "  + lastLatLng.speed)
+        }
+
         view?.updateBackgroundColor()
-        Log.d("loc ->", lastLatLng.toString())
+        if (lastLatLng.latitude != null){
+            var lat = lastLatLng.latitude
+            var lng = lastLatLng.longitude
+            createHoleUseCase.execute(TrackingObserver(), CreateHoleUseCase.Params.withCoords(lat, lng, lvl, axis))
+        }
+
     }
 
 
@@ -85,9 +96,24 @@ class TrackingPresenter @Inject constructor(@Nullable var sensor: Observable<Rea
         if (!locationSubscription?.isDisposed!!){
             locationSubscription?.dispose()
         }
+        createHoleUseCase.dispose()
     }
 
-    fun setSensetiveLvl(lvl: Int){
+    fun setSensetiveLvl(lvl: Float){
         this.lvl = lvl
+    }
+
+    private inner class TrackingObserver : DisposableObserver<AbsResponseEntity>() {
+
+        override fun onComplete() {
+        }
+
+        override fun onError(e: Throwable) {
+            e.printStackTrace()
+        }
+
+        override fun onNext(res: AbsResponseEntity) {
+            Log.d("result ->", " " + res.status)
+        }
     }
 }

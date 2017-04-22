@@ -1,28 +1,17 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 
-buildscript {
-    ext.kotlin_version = '1.1.0'
-    repositories {
-        jcenter()
-        maven {
-            url "https://dl.bintray.com/kotlin/kotlin-eap/"
-        }
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "io.realm:realm-gradle-plugin:3.0.0"
-    }
-}
+
 
 allprojects {
     repositories {
         jcenter()
+        maven { url "https://jitpack.io" }
         maven { url 'https://dl.bintray.com/jetbrains/anko' }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
 }
+
 
 ext {
     compileSdkVersion = 25
@@ -33,11 +22,12 @@ ext {
     conductor = '2.1.0'
     mosby = '3.0.0-alpha1'
     anko = '0.9.1'
-    supportLib = '25.1.1'
+    supportLib = '25.3.1'
     retrofit = '2.2.0'
     gson = "2.7"
-    okhttp = "3.3.1"
-    rxjava = '2.0.4'
+    okhttp = "3.6.0"
+    rxjava = '2.0.8'
+    rxkotlin = '2.0.0'
     rxandroid = '2.0.1'
     dagger = '2.2'
 

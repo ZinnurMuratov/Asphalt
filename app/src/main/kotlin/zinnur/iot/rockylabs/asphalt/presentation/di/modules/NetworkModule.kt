@@ -21,9 +21,11 @@ import zinnur.iot.rockylabs.asphalt.presentation.AsphaltApp
 import android.widget.Toast
 import zinnur.iot.rockylabs.asphalt.presentation.di.scopes.ApplicationContext
 import android.icu.util.ULocale.getLanguage
+import android.util.Log
 import java.util.*
 import com.annimon.stream.ComparatorCompat.chain
 import okhttp3.logging.HttpLoggingInterceptor
+import zinnur.iot.rockylabs.asphalt.data.service.TrackingService
 
 
 /**
@@ -32,7 +34,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 @Module
 class NetworkModule {
 
-    private val HEADER_KEY_ACCESS_TOKEN = "newToken"
+    private val HEADER_KEY_ACCESS_TOKEN = "access-token"
 
 
     @Provides @Singleton fun provideGson(): Gson {
@@ -65,45 +67,46 @@ class NetworkModule {
 
     @Provides @Singleton fun provideOkHttpClient(authPreferences: AuthPreferences, context: Context): OkHttpClient {
         val okHttpClient = OkHttpClient()
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
-        okHttpClient.newBuilder().readTimeout(15, TimeUnit.SECONDS)
-        okHttpClient.newBuilder().connectTimeout(15, TimeUnit.SECONDS)
-        okHttpClient.newBuilder().addInterceptor(interceptor)
-        okHttpClient.newBuilder().addInterceptor {
+        val logging = HttpLoggingInterceptor()
+        logging.level = HttpLoggingInterceptor.Level.BODY
+        return okHttpClient.newBuilder()
+                .readTimeout(300, TimeUnit.SECONDS)
+                .connectTimeout(300, TimeUnit.SECONDS)
+                .addInterceptor(logging)
+                .addInterceptor { chain ->
 
-            chain ->
-            if (!authPreferences.isUserAuthorized()){
-                null!!
-            }
-            val token = authPreferences.userAuthCredentials?.accessToken
-            val request = chain.request().newBuilder().addHeader("Authorization", token).build()
-            chain.proceed(request)
-        }
-        okHttpClient.newBuilder().authenticator({ route, response ->
+                    var request = chain.request().newBuilder().build()
+                    if (!authPreferences.isUserAuthorized()){
+                    }else {
+                        val token = authPreferences.userAuthCredentials?.accessToken
+                         request = chain.request().newBuilder().addHeader("Authorization", token).build()
+                    }
+                    chain.proceed(request)
+                }
+                .authenticator({ route, response ->
 
-            if (!authPreferences.isUserAuthorized()) {
-                // TODO when is userNotAuthorized
-                val toast = Toast.makeText(context,
-                        "Пора покормить кота!", Toast.LENGTH_SHORT)
-                toast.show()
-                null!!
-            }
-            var userCredentials = authPreferences.userAuthCredentials
-            var headers = AuthService.RefreshHelper.refresh(okHttpClient,
-                    Consts.API_ENDPOINT,
-                    userCredentials!!.accessToken,
-                    Consumer<Exception>{})
-            var token = headers.get(HEADER_KEY_ACCESS_TOKEN)
-            authPreferences.saveAuthCredentialsModel(userCredentials.copyWithRefreshedtoken(token))
+                    if (!authPreferences.isUserAuthorized()) {
+                        // TODO when is userNotAuthorized
+                        val toast = Toast.makeText(context,
+                                "No credentails, auth again", Toast.LENGTH_SHORT)
+                        toast.show()
+                        null!!
+                    }
+                    var userCredentials = authPreferences.userAuthCredentials
+                    var headers = AuthService.RefreshHelper.refresh(okHttpClient,
+                            Consts.API_ENDPOINT,
+                            userCredentials!!.refreshToken,
+                            Consumer<Exception>{})
+                    var token = headers.get(HEADER_KEY_ACCESS_TOKEN)
+                    authPreferences.saveAuthCredentialsModel(userCredentials.copyWithRefreshedtoken(token))
 
 
-            response.request().newBuilder()
-                    .headers(headers)
-                    .build()
+                    response.request().newBuilder()
+                            .headers(headers)
+                            .build()
 
-        })
-        return okHttpClient.newBuilder().build()
+                })
+                .build()
 
     }
 
@@ -114,11 +117,9 @@ class NetworkModule {
         return retrofit.create<AuthService>(AuthService::class.java)
     }
 
-
-
-
-
-
+    @Provides @Singleton fun provideTrackingService(retrofit: Retrofit): TrackingService{
+        return retrofit.create<TrackingService>(TrackingService::class.java)
+    }
 
 
 }

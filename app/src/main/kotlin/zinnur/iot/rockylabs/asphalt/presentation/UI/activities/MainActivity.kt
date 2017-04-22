@@ -1,7 +1,7 @@
 package zinnur.iot.rockylabs.asphalt.presentation.UI.activities
 
+import android.app.Activity
 import zinnur.iot.rockylabs.asphalt.presentation.UI.anko.MainActivityLayout
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -12,16 +12,22 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Router
+import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.AnkoLogger
 import zinnur.iot.rockylabs.asphalt.presentation.mvp.views.MainView
 import zinnur.iot.rockylabs.asphalt.presentation.navigation.Navigator
 import zinnur.iot.rockylabs.asphalt.presentation.navigation.PhoneNavigator
 import kotlin.ru.rockylabs.kotlintest.R
-import android.R.id.toggle
 import com.hannesdorfmann.mosby3.mvp.MvpActivity
+import com.kelvinapps.rxfirebase.RxFirebaseAuth
+import com.kelvinapps.rxfirebase.RxFirebaseUser
+import com.miguelbcr.ui.rx_paparazzo2.RxPaparazzo
+import com.miguelbcr.ui.rx_paparazzo2.entities.size.Size
+import com.yalantis.ucrop.UCrop
 import org.jetbrains.anko.doAsync
 import zinnur.iot.rockylabs.asphalt.domain.AuthPreferences
 import zinnur.iot.rockylabs.asphalt.presentation.AsphaltApp
@@ -32,6 +38,7 @@ import javax.inject.Inject
 class MainActivity  : MvpActivity<MainView, MainActivityPresenter>(), MainView, NavigationView.OnNavigationItemSelectedListener, AnkoLogger{
 
 
+
     override fun createPresenter()= AsphaltApp.getComponent(applicationContext).mainPresenter()
 
 
@@ -39,6 +46,8 @@ class MainActivity  : MvpActivity<MainView, MainActivityPresenter>(), MainView, 
     lateinit var container: ViewGroup
     lateinit var drawer:    DrawerLayout
     lateinit var title:     TextView
+    lateinit var userName:  TextView
+    lateinit var email:     TextView
     private lateinit var router: Router
 
     private val viewBinder = MainActivityLayout()
@@ -59,6 +68,7 @@ class MainActivity  : MvpActivity<MainView, MainActivityPresenter>(), MainView, 
         toggle.syncState()
         router = Conductor.attachRouter(this, container, savedInstanceState)
         navigator = PhoneNavigator(router) as Navigator
+        authenticateAnon()
         setStartController()
 
     }
@@ -68,6 +78,7 @@ class MainActivity  : MvpActivity<MainView, MainActivityPresenter>(), MainView, 
         if (!router.hasRootController()){
             doAsync {
                 val res = authPreferences.isUserAuthorized()
+                Log.d("auth", " " + authPreferences.userAuthCredentials?.refreshToken)
                 runOnUiThread{
                     if (res) {
                         showMain()
@@ -78,6 +89,26 @@ class MainActivity  : MvpActivity<MainView, MainActivityPresenter>(), MainView, 
             }
 
         }
+    }
+
+    private fun  authenticateAnon() {
+           RxFirebaseAuth
+                   .signInAnonymously(FirebaseAuth.getInstance())
+                   .flatMap { it -> RxFirebaseUser.getToken(FirebaseAuth.getInstance().currentUser!!, false) }
+                   .subscribe({
+                       it -> Log.d("firebase auth", " " + it)
+                   }, {
+                       it -> it.printStackTrace()
+                   } )
+    }
+
+    override fun getUser() {
+        presenter.getUser()
+    }
+
+    override fun setUserData(name: String, email: String) {
+        this.userName.text = name
+        this.email.text = email
     }
 
     private fun showMain() {
@@ -100,8 +131,9 @@ class MainActivity  : MvpActivity<MainView, MainActivityPresenter>(), MainView, 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.nav_tracking -> navigator.showTracking(true)
-            R.id.nav_feed -> navigator.showFeed(true)
+            R.id.nav_map -> navigator.showMap(true)
             R.id.nav_settings -> navigator.showSettings(true)
+            R.id.nav_feed -> navigator.showFeed(true)
         }
         drawer.closeDrawer(GravityCompat.START)
         return true
@@ -148,6 +180,18 @@ class MainActivity  : MvpActivity<MainView, MainActivityPresenter>(), MainView, 
             navigator.showTracking(true)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun pickSingle(options: UCrop.Options?, size: Size): RxPaparazzo.SingleSelectionBuilder<MainActivity> {
+        
+        val resized = RxPaparazzo.single(this)
+                .sendToMediaScanner()
+                .size(size)
+
+        if (options != null) {
+            resized.crop(options)
+        }
+        return resized
     }
 
 }

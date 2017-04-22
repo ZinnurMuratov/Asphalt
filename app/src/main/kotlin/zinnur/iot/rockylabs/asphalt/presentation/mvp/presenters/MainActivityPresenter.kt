@@ -31,7 +31,9 @@ class MainActivityPresenter @Inject constructor(var userUseCase: UserUseCase ) :
         }
 
         override fun onNext(user: UserResponseEntity) {
-            Log.d("result ->", " " + user.status)
+            Log.d("result ->", " " + user.user.name)
+            view?.setUserData(user.user.name, user.user.email)
+
         }
     }
 }

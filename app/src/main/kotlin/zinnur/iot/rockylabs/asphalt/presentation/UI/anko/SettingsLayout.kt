@@ -1,5 +1,6 @@
 package zinnur.iot.rockylabs.asphalt.presentation.UI.anko
 
+import android.os.Build
 import android.view.Gravity
 import android.view.View
 import org.jetbrains.anko.*
@@ -15,32 +16,34 @@ class SettingsLayout : ViewBinder<SettingsController>{
         return ui.activity!!.UI {
             ui.activity!!.window.setBackgroundDrawableResource(R.color.colorPrimary)
             frameLayout {
+                fitsSystemWindows = true
                 lparams(width = matchParent, height = matchParent) {
+                    topMargin = actionBarSize()
                     padding = dimen(R.dimen.activity_horizontal_margin)
                 }
-//                clipToPadding = false
+                clipToPadding = false
 
                 verticalLayout {
+                    elevation = 10f
+                    backgroundResource = R.color.colorPrimary
                     lparams(width = matchParent, height = wrapContent){
-                        gravity = Gravity.TOP
-//                        padding = dimen(16)
-//                        elevation = dip(16).toFloat()
+                        padding = dip(16)
                     }
                     ui.logout = textView {
-                        lparams(width = wrapContent, height = wrapContent){
-                            gravity = Gravity.CENTER_VERTICAL
+                        backgroundResource = R.color.colorPrimary
+                        lparams(width = matchParent, height = wrapContent){
                         }
-                        text = "logout"
+                        text = "Logout"
                         setFont("fonts/RobotoLight.ttf")
                         textColorResource = R.color.white
-                        textSize = sp(16).toFloat()
+                        textSize = sp(6).toFloat()
                         onClick {
                             ui.openLogoutDialog()
                         }
                     }
 
                 }.lparams(width = matchParent, height = wrapContent) {
-                    gravity = Gravity.CENTER
+                    gravity = Gravity.TOP
                 }
 
             }

@@ -4,7 +4,6 @@ import android.content.SharedPreferences
 import com.annimon.stream.Optional
 import com.annimon.stream.function.Function
 
-import com.f2prateek.rx.preferences2.Preference
 import com.google.gson.Gson
 
 import zinnur.iot.rockylabs.asphalt.domain.model.UserAuthCredentialsModel

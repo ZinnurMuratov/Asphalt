@@ -6,6 +6,8 @@
     <color name="grey">#cdcdcd</color>
     <color name="greyOpacity">#8d000000</color>
     <color name="redOpacity">#8d4b0000</color>
+    <color name="blueOpacity">#b1232484</color>>
+    <color name="greenOpacity">#720dd625</color>
     <color name="black">#000000</color>
     <color name="darkRed">#4b0000</color>
     <color name="redError">#fe6060</color>

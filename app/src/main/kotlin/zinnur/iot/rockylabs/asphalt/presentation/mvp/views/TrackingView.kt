@@ -21,4 +21,7 @@ interface  TrackingView : MvpView {
     fun accentMediumLvl()
 
     fun accentHighLvl()
+
+    fun showLocationNotAvailable()
+
 }

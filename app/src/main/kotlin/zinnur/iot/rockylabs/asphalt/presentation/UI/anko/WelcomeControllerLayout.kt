@@ -35,7 +35,7 @@ class WelcomeControllerLayout : ViewBinder<WelcomeController> {
                         text = "ASPHALT"
                         setFont("fonts/Ailerons.ttf")
                         textColorResource = R.color.white
-                        textSize = sp(36).toFloat()
+                        textSizeDimen = R.dimen.logo_text_size
                     }
                     ui.slogan = textView{
                         lparams(width = wrapContent, height = wrapContent){
@@ -45,7 +45,7 @@ class WelcomeControllerLayout : ViewBinder<WelcomeController> {
                         textColorResource = R.color.grey
                         setFont("fonts/RobotoLight.ttf")
                         textAlignment = center
-                        textSize = sp(8).toFloat()
+                        textSizeDimen = R.dimen.font_20sp
                     }
                 }.lparams(width = matchParent, height = wrapContent) {
                     gravity = Gravity.CENTER
@@ -64,7 +64,7 @@ class WelcomeControllerLayout : ViewBinder<WelcomeController> {
                         }
                         text = "Sign In"
                         setFont("fonts/RobotoLight.ttf")
-                        textSize = sp(6).toFloat()
+                        textSizeDimen = R.dimen.font_16sp
                         backgroundResource = R.drawable.welcome_btn
                         onClick { ui.navigator.showSignIn()}
 
@@ -77,7 +77,7 @@ class WelcomeControllerLayout : ViewBinder<WelcomeController> {
                         }
                         text = "Sign Up"
                         setFont("fonts/RobotoLight.ttf")
-                        textSize = sp(6).toFloat()
+                        textSizeDimen = R.dimen.font_16sp
                         backgroundResource = R.drawable.welcome_btn
                         onClick { ui.navigator.showSignUp()}
 

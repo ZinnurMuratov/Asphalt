@@ -16,6 +16,7 @@ import zinnur.iot.rockylabs.asphalt.presentation.UI.anko.SignUpControllerLayout
 import zinnur.iot.rockylabs.asphalt.presentation.daggerComponent
 import zinnur.iot.rockylabs.asphalt.presentation.mvp.presenters.SignInPresenter
 import zinnur.iot.rockylabs.asphalt.presentation.mvp.presenters.SignUpPresenter
+import zinnur.iot.rockylabs.asphalt.presentation.mvp.views.MainView
 import zinnur.iot.rockylabs.asphalt.presentation.mvp.views.SignInView
 import zinnur.iot.rockylabs.asphalt.presentation.mvp.views.SignUpView
 import zinnur.iot.rockylabs.asphalt.presentation.mvp.views.viewStates.SignInViewState
@@ -50,10 +51,11 @@ class SignUpController : MvpViewStateController<SignUpView, SignUpPresenter, Sig
     var errorView:  TextView? = null
     private lateinit var progressDialog: ProgressDialog
     private val viewBinder = SignUpControllerLayout()
-
+    var activityCallback: MainView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup): View {
         (activity as AppCompatActivity).supportActionBar!!.hide()
+        activityCallback = activity as MainView
         initProgress()
         return viewBinder.bind(this)
     }
@@ -100,6 +102,7 @@ class SignUpController : MvpViewStateController<SignUpView, SignUpPresenter, Sig
     }
 
     override fun navigateToMain() {
+        activityCallback?.getUser()
         navigator.showTracking(true)
     }
 

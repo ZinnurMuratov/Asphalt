@@ -5,7 +5,9 @@ import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.app.Activity
+import android.content.pm.PackageManager
 import android.hardware.Sensor
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.view.*
 import zinnur.iot.rockylabs.asphalt.presentation.UI.anko.TrackingControllerLayout
@@ -26,6 +28,7 @@ import com.hannesdorfmann.mosby3.conductor.viewstate.MvpViewStateController
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
+import com.tbruyelle.rxpermissions2.Permission
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.transitionseverywhere.*
 import com.transitionseverywhere.extra.Scale
@@ -54,6 +57,8 @@ class TrackingController : TrackingView, MvpViewStateController<TrackingView, Tr
     lateinit var textContainer: LinearLayout
     lateinit var lowLvl: TextView
     lateinit var mediumLvl: TextView
+    lateinit var permissionsLayout: LinearLayout
+    lateinit var permissionsGrantedLayout: LinearLayout
     lateinit var highLvl: TextView
     private var clicked = false
     private var permissions = false
@@ -83,7 +88,7 @@ class TrackingController : TrackingView, MvpViewStateController<TrackingView, Tr
         activityCallback.changeTitle("Tracking")
         activityCallback.setHomeEnabled(false)
         graph.addSeries(series)
-        askPermissions()
+        checkPermissions()
     }
 
     override fun onDestroyView(view: View) {
@@ -97,18 +102,60 @@ class TrackingController : TrackingView, MvpViewStateController<TrackingView, Tr
         inflater.inflate(R.menu.tracking, menu)
         val camera = menu.findItem(R.id.action_camera)
         camera.setOnMenuItemClickListener({
-            navigator.showCameraPermission()
+            navigator.showCamera()
             false
         })
 
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    fun askPermissions(){
+
+    fun checkPermissions(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (activity?.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+                showUiIfPermissionsGranted()
+                permissions = true
+            } else {
+                showPermissionsExplanation()
+                permissions = false
+            }
+        } else {
+            showUiIfPermissionsGranted()
+            permissions = true
+        }
+    }
+
+    fun showPermissionsExplanation(){
+        permissionsLayout.visibility = View.VISIBLE
+        permissionsGrantedLayout.visibility = View.GONE
+    }
+
+    fun showUiIfPermissionsGranted(){
+        permissionsGrantedLayout.visibility = View.VISIBLE
+        permissionsLayout.visibility = View.GONE
+
+    }
+
+    fun requestPermissions(){
         RxPermissions(activity as Activity)
                 .request(Manifest.permission.ACCESS_FINE_LOCATION)
-                .subscribe({ granted -> permissions = granted }) { it.printStackTrace() }
+                .subscribe({
+                    granted ->
+                        if (granted) {
+                            permissions = granted
+                            showUiIfPermissionsGranted()
+                        } else {
+                            showPermissionsExplanation()
+                        }
+                }) { it.printStackTrace() }
     }
+
+    override fun showLocationNotAvailable() {
+        clicked = false
+        transitionOnStop()
+        showPermissionsExplanation()
+    }
+
 
     fun onClickPlayBtn(){
         if (!clicked && permissions) {
@@ -125,17 +172,17 @@ class TrackingController : TrackingView, MvpViewStateController<TrackingView, Tr
     }
 
     fun onClickLow(){
-        presenter.setSensetiveLvl(2)
+        presenter.setSensetiveLvl(2.5f)
         accentLowLvl()
     }
 
     fun onClickMedium(){
-        presenter.setSensetiveLvl(3)
+        presenter.setSensetiveLvl(2f)
         accentMediumLvl()
     }
 
     fun onClickHigh(){
-        presenter.setSensetiveLvl(4)
+        presenter.setSensetiveLvl(1.3f)
         accentHighLvl()
     }
 

@@ -31,7 +31,8 @@ class NavHeaderComponent : AnkoComponent<NavigationView> {
                 gravity = START
             }
 
-            textView("Android Studio"){
+            textView(""){
+                tag = "username"
                 topPadding = dimen(R.dimen.nav_header_vertical_spacing)
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     setTextAppearance(TextAppearance_AppCompat_Body1)
@@ -41,7 +42,9 @@ class NavHeaderComponent : AnkoComponent<NavigationView> {
                 }
             }
 
-            textView("android.studio@android.com")
+            textView(""){
+                tag = "email"
+            }
         }
     }
 }

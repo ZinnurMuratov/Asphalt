@@ -16,6 +16,7 @@ import zinnur.iot.rockylabs.asphalt.presentation.mvp.views.SignInView
 import zinnur.iot.rockylabs.asphalt.presentation.mvp.views.viewStates.SignInViewState
 import kotlin.ru.rockylabs.kotlintest.R
 import android.text.TextUtils
+import zinnur.iot.rockylabs.asphalt.presentation.mvp.views.MainView
 import zinnur.iot.rockylabs.asphalt.presentation.navigator
 import zinnur.iot.rockylabs.asphalt.presentation.utils.isEmailValid
 
@@ -36,9 +37,11 @@ class SignInController : MvpViewStateController<SignInView, SignInPresenter, Sig
     var errorView:  TextView? = null
     private lateinit var progressDialog: ProgressDialog
     private val viewBinder = SignInControllerLayout()
+    var activityCallback: MainView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup): View {
         (activity as AppCompatActivity).supportActionBar!!.hide()
+        activityCallback =  activity as MainView
         initProgress()
         return viewBinder.bind(this)
     }
@@ -93,6 +96,7 @@ class SignInController : MvpViewStateController<SignInView, SignInPresenter, Sig
     }
 
     override fun navigateToMain() {
+        activityCallback?.getUser()
         navigator.showTracking(true)
     }
 

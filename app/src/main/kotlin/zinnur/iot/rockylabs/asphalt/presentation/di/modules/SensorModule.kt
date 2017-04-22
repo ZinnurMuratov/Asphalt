@@ -1,6 +1,5 @@
 package zinnur.iot.rockylabs.asphalt.presentation.di.modules
 
-import android.app.Application
 import android.content.Context
 import dagger.Module
 import android.content.pm.PackageManager
@@ -8,17 +7,18 @@ import android.hardware.Sensor
 import com.patloew.rxlocation.RxLocation
 import com.patloew.rxlocation.FusedLocation
 import dagger.Provides
-import zinnur.iot.rockylabs.asphalt.presentation.di.scopes.SensorScope
 import com.github.pwittchen.reactivesensors.library.ReactiveSensorFilter
 import android.hardware.SensorManager
 import com.github.pwittchen.reactivesensors.library.ReactiveSensors
 import com.github.pwittchen.reactivesensors.library.ReactiveSensorEvent
+import com.google.android.gms.location.LocationRequest
 import org.jetbrains.annotations.Nullable
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import zinnur.iot.rockylabs.asphalt.presentation.di.scopes.ControllerScope
 import javax.inject.Named
+import javax.inject.Singleton
 
 
 /**
@@ -51,6 +51,14 @@ class SensorModule{
             return rxLocation.location()
         }
         return null
+    }
+
+    @ControllerScope
+    @Provides
+    fun provideLocationRequset(): LocationRequest {
+        return LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY)
+                .setInterval(2000)
     }
 
 

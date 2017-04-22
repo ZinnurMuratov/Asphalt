@@ -13,6 +13,7 @@ import zinnur.iot.rockylabs.asphalt.presentation.di.modules.NetworkModule
 import javax.inject.Singleton
 import zinnur.iot.rockylabs.asphalt.data.service.AuthService
 import com.google.gson.Gson
+import zinnur.iot.rockylabs.asphalt.data.service.TrackingService
 import zinnur.iot.rockylabs.asphalt.domain.AuthPreferences
 import zinnur.iot.rockylabs.asphalt.presentation.UI.activities.MainActivity
 import zinnur.iot.rockylabs.asphalt.presentation.di.modules.DataModule
@@ -40,6 +41,8 @@ interface ApplicationComponent {
     fun retrofit(): Retrofit
 
     fun authService(): AuthService
+
+    fun trackingService(): TrackingService
 
     fun gson(): Gson
 

@@ -7,3 +7,4 @@ package zinnur.iot.rockylabs.asphalt.presentation.utils;
  public class Consts {
     public static String API_ENDPOINT = "https://asphalt.herokuapp.com/";
 }
+

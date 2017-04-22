@@ -57,15 +57,15 @@ interface Navigator {
         }
     }
 
-    fun showFeed(root: Boolean){
+    fun showMap(root: Boolean){
         val handler = AutoTransitionChangeHandler()
         if (root) {
-            router.setRoot(RouterTransaction.with(FeedController())
+            router.setRoot(RouterTransaction.with(OnMapController())
                     .popChangeHandler(handler)
                     .pushChangeHandler(handler)
             )
         } else {
-            router.pushController(RouterTransaction.with(FeedController())
+            router.pushController(RouterTransaction.with(OnMapController())
                     .popChangeHandler(handler)
                     .pushChangeHandler(handler)
             )
@@ -87,9 +87,24 @@ interface Navigator {
         }
     }
 
-    fun showCameraPermission(){
+    fun showFeed(root: Boolean){
         val handler = AutoTransitionChangeHandler()
-            router.pushController(RouterTransaction.with(NoticePermissonsController())
+        if (root) {
+            router.setRoot(RouterTransaction.with(FeedController())
+                    .popChangeHandler(handler)
+                    .pushChangeHandler(handler)
+            )
+        } else {
+            router.pushController(RouterTransaction.with(FeedController())
+                    .popChangeHandler(handler)
+                    .pushChangeHandler(handler)
+            )
+        }
+    }
+
+    fun showCamera(){
+        val handler = AutoTransitionChangeHandler()
+            router.pushController(RouterTransaction.with(CameraController())
                     .popChangeHandler(handler)
                     .pushChangeHandler(handler)
             )

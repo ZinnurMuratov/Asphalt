@@ -27,4 +27,10 @@ interface ControllerComponent {
 
     fun settingsPresenter(): SettingsPresenter
 
+    fun mapPresenter(): MapPresenter
+
+    fun cameraPresenter(): CameraPresenter
+
+    fun feedPresenter(): FeedPresenter
+
 }

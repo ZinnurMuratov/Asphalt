@@ -11,6 +11,7 @@ import zinnur.iot.rockylabs.asphalt.data.entity.UserResponseEntity
 import android.support.annotation.NonNull
 import com.annimon.stream.function.Consumer
 import okhttp3.*
+import okhttp3.logging.HttpLoggingInterceptor
 
 
 /**
@@ -34,17 +35,23 @@ interface AuthService{
         fun refresh(okHttpClient: OkHttpClient, baseUrl: String, refreshToken: String,
                     onError: Consumer<Exception>): Headers {
 
+            val logging = HttpLoggingInterceptor()
+            logging.level = HttpLoggingInterceptor.Level.HEADERS
+
             val formBuilder = FormBody.Builder()
                     .addEncoded("refreshToken", refreshToken)
                     .build()
 
             val request = Request.Builder()
                     .url(baseUrl + "api/auth/getNewToken")
+                    .header("User-Agent", "OkHttp Headers.java")
+                    .addHeader("Accept", "application/json; q=0.5")
+                    .addHeader("Accept", "application/vnd.github.v3+json")
                     .post(formBuilder)
                     .build()
 
             try {
-                return okHttpClient.newCall(request).execute().headers()
+                return okHttpClient.newBuilder().addInterceptor(logging).build().newCall(request).execute().headers()
             } catch (e: Exception) {
                 e.printStackTrace()
                 onError.accept(e)

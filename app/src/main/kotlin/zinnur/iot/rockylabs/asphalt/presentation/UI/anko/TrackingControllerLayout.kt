@@ -2,6 +2,7 @@ package zinnur.iot.rockylabs.asphalt.presentation.UI.anko
 
 import android.graphics.Color
 import android.opengl.Visibility
+import android.support.design.R.id.center
 import android.support.v4.content.ContextCompat
 import android.view.Gravity
 import android.view.View
@@ -31,6 +32,48 @@ class TrackingControllerLayout : ViewBinder<TrackingController>{
                     padding = dimen(R.dimen.activity_horizontal_margin)
                 }
 
+                ui.permissionsLayout = verticalLayout {
+
+                    visibility = View.GONE
+
+                    imageView {
+                        lparams(width = wrapContent, height = wrapContent){
+                            gravity = Gravity.CENTER_HORIZONTAL
+                        }
+                        scaleType = ImageView.ScaleType.CENTER
+                        imageResource = R.drawable.location_icon_24dp
+                    }
+                    textView {
+                         lparams(width = wrapContent, height = wrapContent){
+                             topMargin = dip(15)
+                             gravity = Gravity.CENTER
+                         }
+                         this.gravity = Gravity.CENTER
+                         setFont("fonts/RobotoLight.ttf")
+                         textColorResource = R.color.white
+                         textSize = sp(9).toFloat()
+                         text = "To tracking holes, \n" +
+                                 "allow Asphalt app \n" +
+                                "access to your location"
+                    }
+
+                    button {
+                        lparams (width = widthProcent(60), height = heightProcent(10) ){
+                            gravity = Gravity.CENTER_HORIZONTAL
+                            topMargin = dip(10)
+                        }
+                        text = "Request"
+                        setFont("fonts/RobotoLight.ttf")
+                        textSize = sp(6).toFloat()
+                        backgroundResource = R.drawable.welcome_btn
+                        onClick { ui.requestPermissions()}
+
+                    }
+                }.lparams(width = matchParent, height = wrapContent){
+                    gravity = Gravity.CENTER
+                    padding = dip(16)
+                }
+
                 ui.graph = graphView {
                     lparams(width = matchParent, height = dip(300)){
                         gravity = Gravity.BOTTOM
@@ -57,7 +100,8 @@ class TrackingControllerLayout : ViewBinder<TrackingController>{
                 }
 
 
-                verticalLayout {
+                ui. permissionsGrantedLayout = verticalLayout {
+                    visibility = View.GONE
                     ui.roundBtn = frameLayout {
                         backgroundResource = R.drawable.round_btn
                         onClick { ui.onClickPlayBtn() }

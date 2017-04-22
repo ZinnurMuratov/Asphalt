@@ -5,13 +5,11 @@ package zinnur.iot.rockylabs.asphalt.presentation
  */
 import android.app.Application
 import android.content.Context
-import android.preference.Preference
-import com.jakewharton.threetenabp.AndroidThreeTen
+import com.miguelbcr.ui.rx_paparazzo2.RxPaparazzo
 import com.squareup.leakcanary.LeakCanary
 import zinnur.iot.rockylabs.asphalt.presentation.di.components.ApplicationComponent
 import zinnur.iot.rockylabs.asphalt.presentation.di.components.DaggerApplicationComponent
 import zinnur.iot.rockylabs.asphalt.presentation.di.modules.ApplicationModule
-import zinnur.iot.rockylabs.asphalt.presentation.di.modules.NetworkModule
 
 @Suppress("DEPRECATION")
 /**
@@ -43,8 +41,15 @@ class AsphaltApp : Application() {
                 .builder()
                 .applicationModule(ApplicationModule(this))
                 .build()
-        AndroidThreeTen.init(this)
+        RxPaparazzo.register(this)
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return
+        }
         LeakCanary.install(this)
     }
+
+
 
 }

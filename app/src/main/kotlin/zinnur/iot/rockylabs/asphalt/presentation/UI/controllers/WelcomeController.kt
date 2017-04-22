@@ -31,13 +31,14 @@ class WelcomeController : WelcomeView, MvpViewStateController<WelcomeView, Welco
     private val viewBinder = WelcomeControllerLayout()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup): View {
         (activity as MainView).showToolbar(false)
+        activityCallback =  activity as MainView
+        activityCallback!!.lockDrawer(true)
         return viewBinder.bind(this)
     }
 
     override fun onActivityStarted(activity: Activity) {
         super.onActivityStarted(activity)
-        activityCallback =  activity as MainView
-        activityCallback!!.lockDrawer(true)
+
     }
 
 

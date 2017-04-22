@@ -6,6 +6,10 @@
             android:id="@+id/nav_tracking"
             android:title="Tracking" />
         <item
+            android:id="@+id/nav_map"
+            android:title="City" />
+
+        <item
             android:id="@+id/nav_feed"
             android:title="Feed" />
         <item
