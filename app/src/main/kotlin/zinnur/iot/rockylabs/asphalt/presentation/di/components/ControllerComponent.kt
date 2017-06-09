@@ -33,4 +33,10 @@ interface ControllerComponent {
 
     fun feedPresenter(): FeedPresenter
 
+    fun trackingFeedPresenter(): TrackingFeedPresenter
+
+    fun potholePresenter(): PotholePresenter
+
+    fun trackPresenter(): TrackPresenter
+
 }

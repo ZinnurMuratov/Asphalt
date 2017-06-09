@@ -86,9 +86,7 @@ class NetworkModule {
                 .authenticator({ route, response ->
 
                     if (!authPreferences.isUserAuthorized()) {
-                        // TODO when is userNotAuthorized
-                        val toast = Toast.makeText(context,
-                                "No credentails, auth again", Toast.LENGTH_SHORT)
+                        val toast = Toast.makeText(context, "No credentails, auth again", Toast.LENGTH_SHORT)
                         toast.show()
                         null!!
                     }

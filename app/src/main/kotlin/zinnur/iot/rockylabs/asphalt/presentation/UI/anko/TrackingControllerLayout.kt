@@ -66,7 +66,7 @@ class TrackingControllerLayout : ViewBinder<TrackingController>{
                         setFont("fonts/RobotoLight.ttf")
                         textSize = sp(6).toFloat()
                         backgroundResource = R.drawable.welcome_btn
-                        onClick { ui.requestPermissions()}
+                        setOnClickListener { ui.requestPermissions()}
 
                     }
                 }.lparams(width = matchParent, height = wrapContent){
@@ -86,7 +86,7 @@ class TrackingControllerLayout : ViewBinder<TrackingController>{
                     gridLabelRenderer.isHumanRounding = true
                     gridLabelRenderer.gridStyle = GridLabelRenderer.GridStyle.NONE
                     ui.series = LineGraphSeries<DataPoint>()
-                    ui.series.color = ContextCompat.getColor(ui.activity, R.color.redError)
+                    ui.series.color = ContextCompat.getColor(ui.activity, R.color.indigo)
                     ui.series.dataPointsRadius = 3f
                     viewport.setMinX(0.0)
                     viewport.setMaxX(10.0)
@@ -100,17 +100,16 @@ class TrackingControllerLayout : ViewBinder<TrackingController>{
                 }
 
 
-                ui. permissionsGrantedLayout = verticalLayout {
+                ui.permissionsGrantedLayout = verticalLayout {
                     visibility = View.GONE
                     ui.roundBtn = frameLayout {
                         backgroundResource = R.drawable.round_btn
-                        onClick { ui.onClickPlayBtn() }
+                        setOnClickListener { ui.onClickPlayBtn() }
                         ui.playerIcon = imageView {
-                            lparams(width = matchParent, height = matchParent){
-                                gravity = Gravity.CENTER
-                                padding = dip(10)
-                            }
-                            imageResource  = R.drawable.ic_play
+                            imageResource  = R.drawable.ic_navigate
+                        }.lparams(width = wrapContent, height = wrapContent){
+                            gravity = Gravity.CENTER
+                            padding = dip(10)
                         }
 
                     }.lparams(width = 350, height = 350) {
@@ -121,46 +120,40 @@ class TrackingControllerLayout : ViewBinder<TrackingController>{
                         visibility = View.GONE
                         orientation = LinearLayout.HORIZONTAL
                         ui.lowLvl = textView {
-                            lparams(width = wrapContent, height = wrapContent){
-                                weight = 1f
-
-                            }
                             gravity = Gravity.CENTER
                             setFont("fonts/RobotoLight.ttf")
-                            textColorResource = R.color.greyOpacity
+                            textColorResource = R.color.grey
                             textSize = sp(8).toFloat()
-                            onClick {
-                                ui.onClickLow()
-                            }
+                            setOnClickListener { ui.onClickLow() }
                             text = "Low"
+                        }.lparams(width = wrapContent, height = wrapContent){
+                            weight = 1f
                         }
 
                         ui.mediumLvl = textView {
-                            lparams(width = wrapContent, height = wrapContent){
-                                weight = 1f
-                            }
                             gravity = Gravity.CENTER
                             setFont("fonts/RobotoLight.ttf")
-                            textColorResource = R.color.redError
+                            textColorResource = R.color.indigo
                             textSize = sp(8).toFloat()
-                            onClick {
+                            setOnClickListener {
                                 ui.onClickMedium()
                             }
                             text = "Medium"
+                        }.lparams(width = wrapContent, height = wrapContent){
+                            weight = 1f
                         }
 
                         ui.highLvl = textView {
-                            lparams(width = wrapContent, height = wrapContent){
-                                weight = 1f
-                            }
                             gravity = Gravity.CENTER
                             setFont("fonts/RobotoLight.ttf")
-                            textColorResource = R.color.greyOpacity
+                            textColorResource = R.color.grey
                             textSize = sp(8).toFloat()
-                            onClick {
+                            setOnClickListener {
                                 ui.onClickHigh()
                             }
                             text = "High"
+                        }.lparams(width = wrapContent, height = wrapContent){
+                            weight = 1f
                         }
 
                     }.lparams(width = matchParent, height = wrapContent) {
@@ -177,7 +170,6 @@ class TrackingControllerLayout : ViewBinder<TrackingController>{
     }
 
     override fun unbind(t: TrackingController) {
-
     }
 
 }

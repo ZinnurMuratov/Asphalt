@@ -7,16 +7,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bluelinelabs.conductor.Controller
 import com.hannesdorfmann.mosby3.conductor.viewstate.MvpViewStateController
-import com.mikepenz.fastadapter.IItem
 import zinnur.iot.rockylabs.asphalt.presentation.UI.anko.FeedLayout
 import com.mikepenz.fastadapter_extensions.items.ProgressItem
 import com.mikepenz.fastadapter.adapters.FooterAdapter
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter
 import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListener
-import zinnur.iot.rockylabs.asphalt.data.entity.FeedEntity
-import zinnur.iot.rockylabs.asphalt.data.entity.GetFeedResponseEntity
+import zinnur.iot.rockylabs.asphalt.data.entity.response.FeedEntity
 import zinnur.iot.rockylabs.asphalt.presentation.UI.adapters.items.FeedItem
 import zinnur.iot.rockylabs.asphalt.presentation.daggerComponent
 import zinnur.iot.rockylabs.asphalt.presentation.mvp.presenters.FeedPresenter

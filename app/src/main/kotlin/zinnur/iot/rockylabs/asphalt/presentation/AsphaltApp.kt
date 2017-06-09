@@ -7,9 +7,13 @@ import android.app.Application
 import android.content.Context
 import com.miguelbcr.ui.rx_paparazzo2.RxPaparazzo
 import com.squareup.leakcanary.LeakCanary
+import io.realm.Realm
 import zinnur.iot.rockylabs.asphalt.presentation.di.components.ApplicationComponent
 import zinnur.iot.rockylabs.asphalt.presentation.di.components.DaggerApplicationComponent
 import zinnur.iot.rockylabs.asphalt.presentation.di.modules.ApplicationModule
+import io.realm.RealmConfiguration
+
+
 
 @Suppress("DEPRECATION")
 /**
@@ -37,6 +41,7 @@ class AsphaltApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        initRealm()
         component = DaggerApplicationComponent
                 .builder()
                 .applicationModule(ApplicationModule(this))
@@ -48,6 +53,11 @@ class AsphaltApp : Application() {
             return
         }
         LeakCanary.install(this)
+    }
+
+
+    fun initRealm(){
+        Realm.init(this)
     }
 
 

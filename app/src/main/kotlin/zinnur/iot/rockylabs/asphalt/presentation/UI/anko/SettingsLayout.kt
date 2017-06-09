@@ -14,7 +14,6 @@ import kotlin.ru.rockylabs.kotlintest.R
 class SettingsLayout : ViewBinder<SettingsController>{
     override fun bind(ui: SettingsController): View {
         return ui.activity!!.UI {
-            ui.activity!!.window.setBackgroundDrawableResource(R.color.colorPrimary)
             frameLayout {
                 fitsSystemWindows = true
                 lparams(width = matchParent, height = matchParent) {
@@ -37,7 +36,7 @@ class SettingsLayout : ViewBinder<SettingsController>{
                         setFont("fonts/RobotoLight.ttf")
                         textColorResource = R.color.white
                         textSize = sp(6).toFloat()
-                        onClick {
+                        setOnClickListener {
                             ui.openLogoutDialog()
                         }
                     }

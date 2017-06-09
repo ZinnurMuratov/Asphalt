@@ -1,9 +1,8 @@
 package zinnur.iot.rockylabs.asphalt.presentation.mvp.presenters
 
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter
-import com.hannesdorfmann.mosby3.mvp.MvpPresenter
 import io.reactivex.observers.DisposableObserver
-import zinnur.iot.rockylabs.asphalt.data.entity.GetFeedResponseEntity
+import zinnur.iot.rockylabs.asphalt.data.entity.response.GetFeedResponseEntity
 import zinnur.iot.rockylabs.asphalt.domain.iteractor.GetFeedUseCase
 import zinnur.iot.rockylabs.asphalt.presentation.mvp.views.FeedView
 import javax.inject.Inject

@@ -8,12 +8,15 @@ import android.view.ViewGroup
 import com.bluelinelabs.conductor.RestoreViewOnCreateController
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
+import com.google.maps.android.clustering.ClusterItem
+import com.google.maps.android.clustering.ClusterManager
 import com.sdoward.rxgooglemap.MapObservableProvider
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import zinnur.iot.rockylabs.asphalt.presentation.UI.activities.OnMemoryLowCallback
 import zinnur.iot.rockylabs.asphalt.presentation.UI.anko.MapLayout
 import zinnur.iot.rockylabs.asphalt.presentation.daggerComponent
+import zinnur.iot.rockylabs.asphalt.presentation.mvp.model.MarkerModel
 import zinnur.iot.rockylabs.asphalt.presentation.mvp.presenters.MapPresenter
 import zinnur.iot.rockylabs.asphalt.presentation.mvp.views.OnMapView
 import kotlin.ru.rockylabs.kotlintest.R
@@ -27,10 +30,11 @@ class OnMapController : RestoreViewOnCreateController(), OnMapView, OnMemoryLowC
     private val viewBinder = MapLayout()
     var mapView: MapView? = null
     var gMap: GoogleMap? = null
+    var clusteringManager : ClusterManager<MarkerModel>? = null
     private lateinit var mapProvider: MapObservableProvider
     private lateinit var presenter: MapPresenter
 
-    val ZOOM_MAXIMUM_LEVEL = 8f
+    val ZOOM_MAXIMUM_LEVEL = 11f
     val KAZAN_DEFAULT_LAT_LNG = LatLng(55.784747, 49.1214908)
 
 
@@ -48,6 +52,8 @@ class OnMapController : RestoreViewOnCreateController(), OnMapView, OnMemoryLowC
                     gMap = googleMap
                     googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(KAZAN_DEFAULT_LAT_LNG, ZOOM_MAXIMUM_LEVEL))
                     googleMap.setMinZoomPreference(ZOOM_MAXIMUM_LEVEL)
+                    clusteringManager = ClusterManager(activity, gMap)
+                    googleMap.setOnCameraIdleListener(clusteringManager)
                     presenter.getHoles()
 
         }
@@ -64,6 +70,11 @@ class OnMapController : RestoreViewOnCreateController(), OnMapView, OnMemoryLowC
         mapView?.onPause()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mapView?.onDestroy()
+    }
+
     override fun onSaveViewState(view: View, outState: Bundle) {
         super.onSaveViewState(view, outState)
         mapView?.onSaveInstanceState(outState)
@@ -73,22 +84,14 @@ class OnMapController : RestoreViewOnCreateController(), OnMapView, OnMemoryLowC
         mapView?.onLowMemory()
     }
 
-    override fun putMarkers(lat: Double, lng: Double, lvl: Double, axis: String) {
-        var color: Int
-        if (axis.equals('x')) {
-            color = ContextCompat.getColor(applicationContext, R.color.greenOpacity)
-        } else if (axis.equals('y')){
-            color = ContextCompat.getColor(applicationContext, R.color.blueOpacity)
-        } else {
-            color = ContextCompat.getColor(applicationContext, R.color.redOpacity)
-        }
-
-        val marker = gMap?.addCircle(CircleOptions()
-                .center(LatLng(lat,lng))
-                .radius(lvl * 10)
-                .fillColor(color)
-                .strokeWidth(0f))
-
+    override fun putMarker(lat: Double, lng: Double, lvl: Double, axis: String) {
+        clusteringManager?.addItem(MarkerModel(lat,lng))
     }
+
+    override fun onMarkersReady() {
+        clusteringManager?.cluster()
+    }
+
+
 
 }

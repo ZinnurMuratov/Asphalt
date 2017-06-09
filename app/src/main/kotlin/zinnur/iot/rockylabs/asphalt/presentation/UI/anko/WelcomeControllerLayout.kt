@@ -44,7 +44,7 @@ class WelcomeControllerLayout : ViewBinder<WelcomeController> {
                         text = "Make asphalt great again"
                         textColorResource = R.color.grey
                         setFont("fonts/RobotoLight.ttf")
-                        textAlignment = center
+                        textAlignment = View.TEXT_ALIGNMENT_CENTER
                         textSizeDimen = R.dimen.font_20sp
                     }
                 }.lparams(width = matchParent, height = wrapContent) {
@@ -66,7 +66,7 @@ class WelcomeControllerLayout : ViewBinder<WelcomeController> {
                         setFont("fonts/RobotoLight.ttf")
                         textSizeDimen = R.dimen.font_16sp
                         backgroundResource = R.drawable.welcome_btn
-                        onClick { ui.navigator.showSignIn()}
+                        setOnClickListener { ui.navigator.showSignIn()}
 
                     }
 
@@ -79,7 +79,7 @@ class WelcomeControllerLayout : ViewBinder<WelcomeController> {
                         setFont("fonts/RobotoLight.ttf")
                         textSizeDimen = R.dimen.font_16sp
                         backgroundResource = R.drawable.welcome_btn
-                        onClick { ui.navigator.showSignUp()}
+                        setOnClickListener { ui.navigator.showSignUp()}
 
                     }
 

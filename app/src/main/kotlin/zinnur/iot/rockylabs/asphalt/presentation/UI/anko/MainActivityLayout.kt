@@ -36,12 +36,11 @@ class MainActivityLayout : ViewBinder<MainActivity> {
                     ui.supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
                     ui.title = textView{
-                        lparams(width = wrapContent, height = wrapContent){
-                            gravity = Gravity.CENTER
-                        }
                         textColorResource = R.color.white
                         textSize = sp(10).toFloat()
                         setFont("fonts/RobotoLight.ttf")
+                    }.lparams(width = wrapContent, height = wrapContent){
+                        gravity = Gravity.CENTER
                     }
 
                 }.lparams(width = matchParent, height = actionBarSize())
@@ -53,7 +52,7 @@ class MainActivityLayout : ViewBinder<MainActivity> {
                 val headerContext = AnkoContext.create(ctx, this)
                 val headerView = NavHeaderComponent()
                         .createView(headerContext)
-                        .lparams(width = matchParent, height = dimen(R.dimen.nav_header_height))
+
                 addHeaderView(headerView)
                 ui.userName = headerView.findViewWithTag("username") as TextView
                 ui.email = headerView.findViewWithTag("email") as TextView

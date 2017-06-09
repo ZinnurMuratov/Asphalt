@@ -17,19 +17,13 @@ import kotlin.ru.rockylabs.kotlintest.R
 
 class NavHeaderComponent : AnkoComponent<NavigationView> {
     override fun createView(ui: AnkoContext<NavigationView>): View = with(ui) {
-        linearLayout(ThemeOverlay_AppCompat_Dark) {
-            orientation = VERTICAL
+        verticalLayout(ThemeOverlay_AppCompat_Dark) {
             gravity = BOTTOM
 
             verticalPadding = dimen(R.dimen.activity_vertical_margin)
             horizontalPadding = dimen(R.dimen.activity_horizontal_margin)
 
             backgroundResource = R.drawable.wellcome_bg
-            imageView(android.R.drawable.sym_def_app_icon) {
-                topPadding = dimen(R.dimen.nav_header_vertical_spacing)
-            }.lparams {
-                gravity = START
-            }
 
             textView(""){
                 tag = "username"

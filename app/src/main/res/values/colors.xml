@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#58514D</color>
-    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorPrimary">#080719</color>
+    <color name="colorPrimaryDark">#080719</color>
     <color name="colorAccent">#ffffff</color>
     <color name="grey">#cdcdcd</color>
     <color name="greyOpacity">#8d000000</color>
+    <color name="indigo">#1f3cf8</color>
     <color name="redOpacity">#8d4b0000</color>
     <color name="blueOpacity">#b1232484</color>>
     <color name="greenOpacity">#720dd625</color>

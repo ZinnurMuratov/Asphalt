@@ -10,6 +10,10 @@
             android:title="City" />
 
         <item
+            android:id="@+id/nav_potholes_feed"
+            android:title="Potholes Feed" />
+
+        <item
             android:id="@+id/nav_feed"
             android:title="Feed" />
         <item

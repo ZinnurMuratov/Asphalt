@@ -18,7 +18,6 @@ import kotlin.ru.rockylabs.kotlintest.R
 class SignUpControllerLayout : ViewBinder<SignUpController>{
     override fun bind(ui: SignUpController): View {
         return ui.activity!!.UI {
-            ui.activity!!.window.setBackgroundDrawableResource(R.drawable.wellcome_bg)
             ui.background = frameLayout {
                 lparams(width = matchParent, height = matchParent)
                 ui.container = verticalLayout {
@@ -87,7 +86,7 @@ class SignUpControllerLayout : ViewBinder<SignUpController>{
                         setFont("fonts/RobotoLight.ttf")
                         textSizeDimen = R.dimen.font_16sp
                         backgroundResource = R.drawable.regular_btn
-                        onClick { ui.onSignUpClicked()}
+                        setOnClickListener { ui.onSignUpClicked()}
 
                     }
 

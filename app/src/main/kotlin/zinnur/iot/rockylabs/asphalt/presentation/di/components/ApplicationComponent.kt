@@ -15,7 +15,9 @@ import zinnur.iot.rockylabs.asphalt.data.service.AuthService
 import com.google.gson.Gson
 import zinnur.iot.rockylabs.asphalt.data.service.TrackingService
 import zinnur.iot.rockylabs.asphalt.domain.AuthPreferences
+import zinnur.iot.rockylabs.asphalt.domain.repository.RealmController
 import zinnur.iot.rockylabs.asphalt.presentation.UI.activities.MainActivity
+import zinnur.iot.rockylabs.asphalt.presentation.di.modules.CachingModule
 import zinnur.iot.rockylabs.asphalt.presentation.di.modules.DataModule
 import zinnur.iot.rockylabs.asphalt.presentation.mvp.presenters.MainActivityPresenter
 
@@ -24,7 +26,7 @@ import zinnur.iot.rockylabs.asphalt.presentation.mvp.presenters.MainActivityPres
  * Created by Zinnur on 12.01.17.
  */
 
-@Component(modules = arrayOf(ApplicationModule::class, NetworkModule::class, DataModule::class))
+@Component(modules = arrayOf(ApplicationModule::class, NetworkModule::class, DataModule::class, CachingModule::class))
 @Singleton
 interface ApplicationComponent {
 
@@ -53,5 +55,7 @@ interface ApplicationComponent {
     fun inject(a: MainActivity)
 
     fun mainPresenter(): MainActivityPresenter
+
+    fun realmController(): RealmController
 
 }

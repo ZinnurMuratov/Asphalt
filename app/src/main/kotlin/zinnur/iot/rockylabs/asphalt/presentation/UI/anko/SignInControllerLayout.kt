@@ -19,7 +19,6 @@ class SignInControllerLayout : ViewBinder<SignInController> {
 
     override fun bind(ui: SignInController): View {
         return ui.activity!!.UI {
-            ui.activity!!.window.setBackgroundDrawableResource(R.drawable.wellcome_bg)
             ui.background = frameLayout {
                 lparams(width = matchParent, height = matchParent)
                 ui.container = verticalLayout {
@@ -67,7 +66,7 @@ class SignInControllerLayout : ViewBinder<SignInController> {
                         setFont("fonts/RobotoLight.ttf")
                         textSizeDimen = R.dimen.font_16sp
                         backgroundResource = R.drawable.regular_btn
-                        onClick { ui.onLoginClicked()}
+                        setOnClickListener { ui.onLoginClicked()}
 
                     }
 

@@ -4,8 +4,8 @@ import javax.inject.Inject
 
 import io.reactivex.Observable
 import io.reactivex.Scheduler
-import zinnur.iot.rockylabs.asphalt.data.entity.AuthResponseEntity
-import zinnur.iot.rockylabs.asphalt.data.entity.LoginRequestBody
+import zinnur.iot.rockylabs.asphalt.data.entity.response.AuthResponseEntity
+import zinnur.iot.rockylabs.asphalt.data.entity.request.LoginRequestBody
 import zinnur.iot.rockylabs.asphalt.data.service.AuthService
 import zinnur.iot.rockylabs.asphalt.domain.AuthPreferences
 import zinnur.iot.rockylabs.asphalt.domain.model.UserAuthCredentialsModel

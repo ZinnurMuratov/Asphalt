@@ -1,6 +1,5 @@
 package zinnur.iot.rockylabs.asphalt.domain.iteractor
 
-import dagger.internal.Preconditions
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers

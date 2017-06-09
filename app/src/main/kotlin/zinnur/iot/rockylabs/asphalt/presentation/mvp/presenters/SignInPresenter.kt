@@ -6,7 +6,7 @@ import zinnur.iot.rockylabs.asphalt.domain.iteractor.LoginUseCase
 import zinnur.iot.rockylabs.asphalt.presentation.mvp.views.SignInView
 import javax.inject.Inject
 import io.reactivex.observers.DisposableObserver
-import zinnur.iot.rockylabs.asphalt.data.entity.AuthResponseEntity
+import zinnur.iot.rockylabs.asphalt.data.entity.response.AuthResponseEntity
 
 
 

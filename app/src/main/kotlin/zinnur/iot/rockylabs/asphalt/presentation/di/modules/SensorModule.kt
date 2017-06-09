@@ -16,6 +16,11 @@ import org.jetbrains.annotations.Nullable
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
+import zinnur.iot.rockylabs.asphalt.domain.repository.RealmController
+import zinnur.iot.rockylabs.asphalt.domain.repository.pothole.PotholeRepository
+import zinnur.iot.rockylabs.asphalt.domain.repository.pothole.PotholeRepositoryImpl
+import zinnur.iot.rockylabs.asphalt.domain.repository.track.TrackRepository
+import zinnur.iot.rockylabs.asphalt.domain.repository.track.TrackRepositoryImpl
 import zinnur.iot.rockylabs.asphalt.presentation.di.scopes.ControllerScope
 import javax.inject.Named
 import javax.inject.Singleton
@@ -53,13 +58,29 @@ class SensorModule{
         return null
     }
 
+
+
     @ControllerScope
     @Provides
     fun provideLocationRequset(): LocationRequest {
         return LocationRequest.create()
-                .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY)
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(2000)
     }
+
+
+    @Provides
+    @ControllerScope
+    fun providePotholeRepository(realmController: RealmController) : PotholeRepository {
+        return PotholeRepositoryImpl(realmController)
+    }
+
+    @Provides
+    @ControllerScope
+    fun provideTrackRepository(realmController: RealmController) : TrackRepository {
+        return TrackRepositoryImpl(realmController)
+    }
+
 
 
 

@@ -2,7 +2,7 @@ package zinnur.iot.rockylabs.asphalt.domain.iteractor
 
 import io.reactivex.Observable
 import io.reactivex.Scheduler
-import zinnur.iot.rockylabs.asphalt.data.entity.GetFeedResponseEntity
+import zinnur.iot.rockylabs.asphalt.data.entity.response.GetFeedResponseEntity
 import zinnur.iot.rockylabs.asphalt.data.service.TrackingService
 import javax.inject.Inject
 

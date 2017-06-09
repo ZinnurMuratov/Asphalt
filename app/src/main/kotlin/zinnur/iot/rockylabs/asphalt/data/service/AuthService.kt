@@ -4,11 +4,10 @@ import io.reactivex.Observable
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
-import zinnur.iot.rockylabs.asphalt.data.entity.AuthResponseEntity
-import zinnur.iot.rockylabs.asphalt.data.entity.LoginRequestBody
-import zinnur.iot.rockylabs.asphalt.data.entity.SignUpRequstBody
-import zinnur.iot.rockylabs.asphalt.data.entity.UserResponseEntity
-import android.support.annotation.NonNull
+import zinnur.iot.rockylabs.asphalt.data.entity.response.AuthResponseEntity
+import zinnur.iot.rockylabs.asphalt.data.entity.request.LoginRequestBody
+import zinnur.iot.rockylabs.asphalt.data.entity.request.SignUpRequstBody
+import zinnur.iot.rockylabs.asphalt.data.entity.response.UserResponseEntity
 import com.annimon.stream.function.Consumer
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor

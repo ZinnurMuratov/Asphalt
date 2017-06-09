@@ -132,6 +132,7 @@ class MainActivity  : MvpActivity<MainView, MainActivityPresenter>(), MainView, 
         when(item.itemId){
             R.id.nav_tracking -> navigator.showTracking(true)
             R.id.nav_map -> navigator.showMap(true)
+            R.id.nav_potholes_feed -> navigator.showPotholeFeed(true)
             R.id.nav_settings -> navigator.showSettings(true)
             R.id.nav_feed -> navigator.showFeed(true)
         }

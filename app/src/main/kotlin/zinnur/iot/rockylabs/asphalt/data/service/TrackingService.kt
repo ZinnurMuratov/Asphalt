@@ -5,7 +5,11 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
-import zinnur.iot.rockylabs.asphalt.data.entity.*
+import zinnur.iot.rockylabs.asphalt.data.entity.request.CreateHoleRequest
+import zinnur.iot.rockylabs.asphalt.data.entity.request.CreatePhotoHoleRequest
+import zinnur.iot.rockylabs.asphalt.data.entity.response.AbsResponseEntity
+import zinnur.iot.rockylabs.asphalt.data.entity.response.GetFeedResponseEntity
+import zinnur.iot.rockylabs.asphalt.data.entity.response.GetHoleResponseEntity
 
 /**
  * Created by Zinnur on 09.04.17.

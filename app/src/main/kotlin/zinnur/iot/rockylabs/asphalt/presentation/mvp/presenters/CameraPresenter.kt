@@ -3,21 +3,17 @@ package zinnur.iot.rockylabs.asphalt.presentation.mvp.presenters
 import android.location.Location
 import android.net.Uri
 import android.support.annotation.Nullable
-import android.text.format.Time
 import android.util.Log
 import com.google.android.gms.location.LocationRequest
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter
 import com.patloew.rxlocation.FusedLocation
 import io.reactivex.disposables.Disposables
-import io.reactivex.rxkotlin.toSingle
 import zinnur.iot.rockylabs.asphalt.presentation.mvp.views.CameraView
-import zinnur.iot.rockylabs.asphalt.presentation.mvp.views.TrackingView
 import javax.inject.Inject
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import com.kelvinapps.rxfirebase.RxFirebaseStorage
 import io.reactivex.observers.DisposableObserver
-import zinnur.iot.rockylabs.asphalt.data.entity.AbsResponseEntity
+import zinnur.iot.rockylabs.asphalt.data.entity.response.AbsResponseEntity
 import zinnur.iot.rockylabs.asphalt.domain.iteractor.CreatePhotoHoleUseCase
 import java.io.File
 

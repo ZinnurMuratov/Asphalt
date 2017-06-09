@@ -14,7 +14,6 @@ import kotlin.ru.rockylabs.kotlintest.R
 class CameraLayout : ViewBinder<CameraController>{
     override fun bind(ui: CameraController): View {
         return ui.activity!!.UI {
-            ui.activity!!.window.setBackgroundDrawableResource(R.color.colorPrimary)
             frameLayout {
                 lparams(width = matchParent, height = matchParent) {
                 }
@@ -61,7 +60,7 @@ class CameraLayout : ViewBinder<CameraController>{
                         setFont("fonts/RobotoLight.ttf")
                         textSize = sp(6).toFloat()
                         backgroundResource = R.drawable.welcome_btn
-                        onClick { ui.requestCamera()}
+                        setOnClickListener { ui.requestCamera()}
 
                     }
                 }.lparams(width = matchParent, height = wrapContent) {
@@ -78,28 +77,26 @@ class CameraLayout : ViewBinder<CameraController>{
 
                 ui.takePhotoBtn = button {
                     visibility = View.GONE
-                    lparams (width = matchParent, height = heightProcent(10) ){
-                        gravity = Gravity.BOTTOM
-                    }
                     text = "Take photo"
                     setFont("fonts/RobotoLight.ttf")
                     textSize = sp(6).toFloat()
                     backgroundResource = R.drawable.welcome_btn
-                    onClick { ui.takePhoto()}
+                    setOnClickListener { ui.takePhoto()}
 
+                }.lparams (width = matchParent, height = heightProcent(10) ){
+                    gravity = Gravity.BOTTOM
                 }
 
                 ui.uploadPhotoBtn = button {
                     visibility = View.GONE
-                    lparams (width = matchParent, height = heightProcent(10) ){
-                        gravity = Gravity.BOTTOM
-                    }
                     text = "Upload photo"
                     setFont("fonts/RobotoLight.ttf")
                     textSize = sp(6).toFloat()
                     backgroundResource = R.drawable.regular_btn
-                    onClick { ui.uploadPhoto()}
+                    setOnClickListener { ui.uploadPhoto()}
 
+                }.lparams (width = matchParent, height = heightProcent(10) ){
+                    gravity = Gravity.BOTTOM
                 }
 
             }

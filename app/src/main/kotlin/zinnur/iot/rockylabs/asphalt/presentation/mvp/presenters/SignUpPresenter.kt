@@ -3,7 +3,7 @@ package zinnur.iot.rockylabs.asphalt.presentation.mvp.presenters
 import android.util.Log
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter
 import io.reactivex.observers.DisposableObserver
-import zinnur.iot.rockylabs.asphalt.data.entity.AuthResponseEntity
+import zinnur.iot.rockylabs.asphalt.data.entity.response.AuthResponseEntity
 import zinnur.iot.rockylabs.asphalt.domain.iteractor.SignUpUseCase
 import zinnur.iot.rockylabs.asphalt.presentation.mvp.views.SignUpView
 import javax.inject.Inject

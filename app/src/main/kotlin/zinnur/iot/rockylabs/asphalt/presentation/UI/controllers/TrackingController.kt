@@ -189,17 +189,19 @@ class TrackingController : TrackingView, MvpViewStateController<TrackingView, Tr
 
 
     override fun transitionOnStart(){
+        Log.d("state", "on start")
         viewState.setShowProccess()
         TransitionManager.beginDelayedTransition(container, TransitionSet()
                 .addTransition(ChangeBounds().setInterpolator(AccelerateInterpolator()))
                 .addTransition(Fade().setInterpolator(LinearInterpolator()))
                 .addTransition(Scale()))
         graph.visibility = View.VISIBLE
-        playerIcon.imageResource = R.drawable.ic_stop
+        playerIcon.imageResource = R.drawable.ic_action_stop
         textContainer.visibility = View.VISIBLE
     }
 
     override fun transitionOnStop(){
+        Log.d("state", "on stop")
         viewState.setShowIdle()
         TransitionManager.beginDelayedTransition(container, TransitionSet()
                 .addTransition(ChangeBounds().setInterpolator(AccelerateInterpolator()))
@@ -207,7 +209,7 @@ class TrackingController : TrackingView, MvpViewStateController<TrackingView, Tr
                 .addTransition(Scale()))
         textContainer.visibility = View.GONE
         graph.visibility = View.GONE
-        playerIcon.imageResource = R.drawable.ic_play
+        playerIcon.imageResource = R.drawable.ic_navigate
     }
 
 
@@ -226,21 +228,21 @@ class TrackingController : TrackingView, MvpViewStateController<TrackingView, Tr
     override fun updateGraph(accel: Double) = series.appendData(DataPoint(lastX++.toDouble(), accel), true, 10)
 
     override fun accentLowLvl() {
-        lowLvl.textColorResource = R.color.redError
-        mediumLvl.textColorResource = R.color.greyOpacity
-        highLvl.textColorResource = R.color.greyOpacity
+        lowLvl.textColorResource = R.color.indigo
+        mediumLvl.textColorResource = R.color.grey
+        highLvl.textColorResource = R.color.grey
     }
 
     override fun accentHighLvl() {
-        lowLvl.textColorResource = R.color.greyOpacity
-        mediumLvl.textColorResource = R.color.greyOpacity
-        highLvl.textColorResource = R.color.redError
+        lowLvl.textColorResource = R.color.grey
+        mediumLvl.textColorResource = R.color.grey
+        highLvl.textColorResource = R.color.indigo
     }
 
     override fun accentMediumLvl() {
-        lowLvl.textColorResource = R.color.greyOpacity
-        mediumLvl.textColorResource = R.color.redError
-        highLvl.textColorResource = R.color.greyOpacity
+        lowLvl.textColorResource = R.color.grey
+        mediumLvl.textColorResource = R.color.indigo
+        highLvl.textColorResource = R.color.grey
     }
 
 }
